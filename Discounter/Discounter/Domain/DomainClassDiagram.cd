@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Domain.Admin">
+    <Position X="4" Y="4.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAwAAAAACAgAAAEQQAIAAAAAQAAAAAAAIAAAAAAAACI=</HashCode>
+      <FileName>Admin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.Discount">
+    <Position X="11" Y="4.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAgIAAACAAQgkAAAAAgAAAQEAAgACAACAAACAAQAAIA=</HashCode>
+      <FileName>Discount.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.DiscountedItem">
+    <Position X="11.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAggAAgAAgAAAQAAACAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>DiscountedItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.DiscountRequest">
+    <Position X="14.25" Y="5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAIAAgAAIAAAAAABIAAAAAAAAAAAAA=</HashCode>
+      <FileName>DiscountRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.Person">
+    <Position X="6.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAgAAAEAgAQAQAAAAAAAACAgAAAAAAAAA=</HashCode>
+      <FileName>Person.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.Shop">
+    <Position X="9" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAgAAAAAAAAAEAACAAAAAAAAAAA=</HashCode>
+      <FileName>Shop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.ShopManager">
+    <Position X="7.75" Y="4.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAACAgAAAAAAAAAAAAAAAEIQAAAAAA=</HashCode>
+      <FileName>ShopManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.Trademark">
+    <Position X="14.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAggAAAAAgAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Trademark.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Domain.IAuthorizable">
+    <Position X="7.75" Y="8.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>IAuthorizable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Domain.ItemType">
+    <Position X="4.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ItemType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Domain.UserRole">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>UserRole.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
