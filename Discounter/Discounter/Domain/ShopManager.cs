@@ -8,7 +8,7 @@ namespace Domain
 {
     public class ShopManager : Person
     {
-        public Shop ManagedShop { get; set; }
+        public Shop? ManagedShop { get; set; }
 
         public ShopManager() { }
 
