@@ -64,6 +64,22 @@ namespace DomainTests
         }
 
         [TestMethod]
+        public void StartIsNull()
+        {
+            Discount discount = new Discount("Discount", EmptyItem, "WOW MEGA SALEEEEE", 60.99m, 29.99m, new DateTime(2024, 6, 27), new DateTime(2024, 6, 28));
+            discount.StartDateTime = null;
+            Assert.ThrowsException<ArgumentException>(() => discount.IsValid());
+        }
+
+        [TestMethod]
+        public void EndIsNull() 
+        {
+            Discount discount = new Discount("Discount", EmptyItem, "WOW MEGA SALEEEEE", 60.99m, 29.99m, new DateTime(2024, 6, 27), new DateTime(2024, 6, 28));
+            discount.EndDateTime = null;
+            Assert.ThrowsException<ArgumentException>(() => discount.IsValid());
+        }
+
+        [TestMethod]
         public void StartInThePast()
         {
             Discount discount = new Discount("Discount", EmptyItem, "WOW MEGA SALEEEEE", 60.99m, 29.99m, new DateTime(2024, 6, 27), new DateTime(2024, 6, 28));
