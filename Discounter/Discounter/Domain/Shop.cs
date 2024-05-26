@@ -10,7 +10,7 @@ namespace Domain
     public class Shop
     {
         public int? ID { get; set; }
-        public Trademark Trademark { get; set; }
+        public Trademark? Trademark { get; set; }
         public string Address { get; set; }
 
         public Shop() { }

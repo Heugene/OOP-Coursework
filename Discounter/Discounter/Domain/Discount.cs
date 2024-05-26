@@ -20,8 +20,8 @@ namespace Domain
         { 
             get { return (byte)(100 * (1 - NewPrice / OldPrice)); }
         }
-        public DateTime StartDateTime { get; set; }
-        public DateTime EndDateTime { get; set; }
+        public DateTime? StartDateTime { get; set; }
+        public DateTime? EndDateTime { get; set; }
         public bool IsApproved { get; private set; } = false;
         public bool WasRejected { get; private set; } = false;
 
@@ -75,7 +75,7 @@ namespace Domain
         {
             if (String.IsNullOrEmpty(Name))
             {
-                throw new ArgumentException("Address can`t be null or an empty string");
+                throw new ArgumentException("Name can`t be null or an empty string");
             }
             if (Item is null)
             {
@@ -96,6 +96,14 @@ namespace Domain
             if (NewPrice >= OldPrice)
             {
                 throw new ArgumentException("New price can`t be higher or equal to the old price");
+            }
+            if (StartDateTime is null)
+            {
+                throw new ArgumentException("Start datetime can`t be null");
+            }
+            if (EndDateTime is null)
+            {
+                throw new ArgumentException("End datetime can`t be null");
             }
             if (StartDateTime < DateTime.Now)
             {
