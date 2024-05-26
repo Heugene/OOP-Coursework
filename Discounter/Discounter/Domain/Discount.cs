@@ -75,7 +75,7 @@ namespace Domain
         {
             if (String.IsNullOrEmpty(Name))
             {
-                throw new ArgumentException("Address can`t be null or an empty string");
+                throw new ArgumentException("Name can`t be null or an empty string");
             }
             if (Item is null)
             {
