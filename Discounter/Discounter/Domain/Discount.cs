@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    public class Discount
+    public class Discount : IValidable
     {
         public int? ID { get; set; }
         public string Name { get; set; }

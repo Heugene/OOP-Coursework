@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    public class DiscountRequest
+    public class DiscountRequest : IValidable
     {
         public int ID { get; set; }
         public DateTime? CreatedDateTime { get; set; }

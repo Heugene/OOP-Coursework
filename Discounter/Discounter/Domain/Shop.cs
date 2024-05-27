@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace Domain
 {
-    public class Shop
+    public class Shop : IValidable
     {
         public int? ID { get; set; }
         public Trademark? Trademark { get; set; }
