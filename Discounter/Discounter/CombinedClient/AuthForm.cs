@@ -13,24 +13,47 @@ namespace CombinedClient
 {
     public partial class AuthForm : Form
     {
-        Person person;
+        internal Person? person;
 
-        public AuthForm(Person person)
+        public AuthForm()
         {
-            this.person = person;
             InitializeComponent();
         }
 
         bool Identificate(string login)
         {
             // перевірка, чи є такий логін в БД через контролер
-            throw new NotImplementedException();
+            if (radioButton1.Checked)
+            {
+                if (DAL.AdminController.Identificate(login))
+                {
+                    return true;
+                }
+                else return false;
+            }
+            if (radioButton2.Checked) 
+            {
+                throw new NotImplementedException();
+            }
+            return false;
         }
 
         bool Authentificate(string login, string password)
         {
             // перевірка, чи співпадає у даного логіну пароль із зазначеним
-            throw new NotImplementedException();
+            if (radioButton1.Checked)
+            {
+                if (DAL.AdminController.Authentificate(login, password))
+                {
+                    return true;
+                }
+                else return false;
+            }
+            if (radioButton2.Checked)
+            {
+                throw new NotImplementedException();
+            }
+            return false;
         }
 
 
@@ -43,6 +66,14 @@ namespace CombinedClient
                     MessageBox.Show("Авторизація успішна!", "Успіх!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     // Звернутися до контролера, щоб задав змінну юзера.
                     // person = ...
+                    if (radioButton1.Checked)
+                    {
+                        person = DAL.AdminController.GetAdmin(textBoxLogin.Text, maskedTextBox1.Text);
+                    }
+                    if (radioButton2.Checked)
+                    {
+                        throw new NotImplementedException();
+                    }
                     Close();
                 }
                 else
