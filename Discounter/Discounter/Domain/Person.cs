@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace Domain
 {
-    public abstract class Person
+    public abstract class Person : IValidable
     {
         public int? ID { get; set; }
         public string Name { get; set; }
@@ -27,7 +27,6 @@ namespace Domain
         {
             ID = id;
         }
-
 
         /// <summary>
         /// Тут можна задати правила валідації, за порушення яких при виклику даного методу викидатимуться ексепшени

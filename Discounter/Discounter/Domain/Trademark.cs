@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    public class Trademark
+    public class Trademark : IValidable
     {
         public int? ID {  get; set; }
         public string Name { get; set; }
