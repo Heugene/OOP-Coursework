@@ -16,7 +16,7 @@ namespace CombinedClient
         void Main_Load(object sender, EventArgs e)
         {
             toolStripTextBoxSearch.Text = searchBarPlaceholder;
-            Text = "Discounter: Unauthorized";
+            Deauthorize();
         }
 
         void toolStripTextBoxSearch_Enter(object sender, EventArgs e) 
@@ -37,8 +37,10 @@ namespace CombinedClient
 
         void увійтиToolStripMenuItem_Click(object sender, EventArgs e) 
         {
-            AuthForm authForm = new AuthForm(authorizedUser);
+            AuthForm authForm = new AuthForm();
             authForm.ShowDialog();
+            authorizedUser = authForm.person;
+            MessageBox.Show(authorizedUser.Email);
             if (!Authorize())
             {
                 MessageBox.Show("Щось пішло не так...", "Помилка авторизації!", MessageBoxButtons.OK, MessageBoxIcon.Error);

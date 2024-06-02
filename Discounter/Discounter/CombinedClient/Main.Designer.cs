@@ -42,8 +42,10 @@
             пропозиціїToolStripMenuItem = new ToolStripMenuItem();
             товариToolStripMenuItem = new ToolStripMenuItem();
             знижкиToolStripMenuItem = new ToolStripMenuItem();
+            toolStripMenuItem2 = new ToolStripMenuItem();
             SidePanel = new Panel();
             panel1 = new Panel();
+            flowLayoutPanel1 = new FlowLayoutPanel();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -51,7 +53,7 @@
             // 
             menuStrip1.BackColor = Color.DarkOrange;
             menuStrip1.ImageScalingSize = new Size(24, 24);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { знайтиToolStripMenuItem, toolStripTextBoxSearch, увійтиToolStripMenuItem, вийтиToolStripMenuItem, адмініструванняToolStripMenuItem, toolStripMenuItem1, пропозиціїToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { знайтиToolStripMenuItem, toolStripTextBoxSearch, увійтиToolStripMenuItem, вийтиToolStripMenuItem, адмініструванняToolStripMenuItem, toolStripMenuItem1, пропозиціїToolStripMenuItem, toolStripMenuItem2 });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(929, 35);
@@ -81,7 +83,7 @@
             увійтиToolStripMenuItem.Name = "увійтиToolStripMenuItem";
             увійтиToolStripMenuItem.Size = new Size(87, 31);
             увійтиToolStripMenuItem.Text = "Увійти..";
-            увійтиToolStripMenuItem.Click += this.увійтиToolStripMenuItem_Click;
+            увійтиToolStripMenuItem.Click += увійтиToolStripMenuItem_Click;
             // 
             // вийтиToolStripMenuItem
             // 
@@ -144,6 +146,11 @@
             знижкиToolStripMenuItem.Size = new Size(184, 34);
             знижкиToolStripMenuItem.Text = "Знижки..";
             // 
+            // toolStripMenuItem2
+            // 
+            toolStripMenuItem2.Name = "toolStripMenuItem2";
+            toolStripMenuItem2.Size = new Size(16, 31);
+            // 
             // SidePanel
             // 
             SidePanel.BackColor = Color.PeachPuff;
@@ -162,11 +169,21 @@
             panel1.Size = new Size(729, 40);
             panel1.TabIndex = 2;
             // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.AutoScroll = true;
+            flowLayoutPanel1.Dock = DockStyle.Fill;
+            flowLayoutPanel1.Location = new Point(200, 35);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(729, 469);
+            flowLayoutPanel1.TabIndex = 3;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(929, 544);
+            Controls.Add(flowLayoutPanel1);
             Controls.Add(panel1);
             Controls.Add(SidePanel);
             Controls.Add(menuStrip1);
@@ -200,5 +217,7 @@
         private ToolStripMenuItem пропозиціїToolStripMenuItem;
         private ToolStripMenuItem товариToolStripMenuItem;
         private ToolStripMenuItem знижкиToolStripMenuItem;
+        private ToolStripMenuItem toolStripMenuItem2;
+        private FlowLayoutPanel flowLayoutPanel1;
     }
 }
