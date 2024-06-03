@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    public class DiscountedItem
+    public class DiscountedItem : IValidable
     {
         public int? ID {  get; set; }
         public string Name { get; set; }
