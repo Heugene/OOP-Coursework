@@ -103,7 +103,7 @@ namespace DAL
             SqlCommand cmd = sqlConnection.CreateCommand();
             try
             {
-                cmd.CommandText = $"UPDATE Trademark SET Name = {name}, Description = {description} WHERE Id = {trademark.ID};";
+                cmd.CommandText = $"UPDATE Trademark SET Name = '{name}', Description = '{description}' WHERE Id = {trademark.ID};";
                 cmd.ExecuteNonQuery();
                 sqlConnection.Close();
                 trademark.Name = name;

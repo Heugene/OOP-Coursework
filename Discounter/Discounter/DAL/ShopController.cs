@@ -130,7 +130,7 @@ namespace DAL
             SqlCommand cmd = sqlConnection.CreateCommand();
             try
             {
-                cmd.CommandText = $"UPDATE Shop SET Address = {address}, WHERE Id = {shop.ID};";
+                cmd.CommandText = $"UPDATE Shop SET Address = '{address}', WHERE Id = {shop.ID};";
                 cmd.ExecuteNonQuery();
                 sqlConnection.Close();
                 shop.Address = address;
