@@ -17,13 +17,14 @@ namespace DAL
             SqlCommand cmd = sqlConnection.CreateCommand();
             cmd.CommandText = $"SELECT 1 FROM ShopManager WHERE Email = '{login}';";
             var result = cmd.ExecuteScalar();
-            sqlConnection.Close();
             if (result is null)
             {
+                sqlConnection.Close();
                 return false;
             }
             else
             {
+                sqlConnection.Close();
                 return true;
             }
         }
@@ -35,13 +36,14 @@ namespace DAL
             SqlCommand cmd = sqlConnection.CreateCommand();
             cmd.CommandText = $"SELECT 1 FROM ShopManager WHERE Email = '{login}' AND Password = '{password}';";
             var result = cmd.ExecuteReader();
-            sqlConnection.Close();
             if (!result.HasRows)
             {
+                sqlConnection.Close();
                 return false;
             }
             else
             {
+                sqlConnection.Close();
                 return true;
             }
         }

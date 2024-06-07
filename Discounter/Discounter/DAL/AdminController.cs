@@ -16,10 +16,12 @@ namespace DAL
             if (result is null)
             {
                 return false;
+                sqlConnection.Close();
             }
             else
             {
                 return true;
+                sqlConnection.Close();
             }
         }
 
@@ -33,10 +35,12 @@ namespace DAL
             if (!result.HasRows)
             {
                 return false;
+                sqlConnection.Close();
             }
             else
             {
                 return true;
+                sqlConnection.Close();
             }
         }
 
