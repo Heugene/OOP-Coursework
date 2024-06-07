@@ -19,7 +19,7 @@ namespace DAL
             SqlCommand cmd = sqlConnection.CreateCommand();
             try
             {
-                cmd.CommandText = $"INSERT INTO Trademark VALUES ({name}, {description});";
+                cmd.CommandText = $"INSERT INTO Trademark VALUES ('{name}', '{description}');";
                 cmd.ExecuteNonQuery();
             }
             catch
