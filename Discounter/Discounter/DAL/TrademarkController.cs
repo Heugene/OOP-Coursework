@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace DAL
 {
-    internal class TrademarkController
+    public class TrademarkController
     {
         public static Trademark CreateTrademark(string name, string description)
         {

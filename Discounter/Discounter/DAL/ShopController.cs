@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace DAL
 {
-    internal class ShopController
+    public class ShopController
     {
         public static Shop CreateShop(Trademark trademark, string address)
         {

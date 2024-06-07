@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    internal class ManagerController
+    public class ManagerController
     {
         public static bool Identificate(string login)
         {
