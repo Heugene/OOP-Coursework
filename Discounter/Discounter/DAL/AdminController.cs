@@ -34,13 +34,13 @@ namespace DAL
             var result = cmd.ExecuteReader();
             if (!result.HasRows)
             {
-                return false;
                 sqlConnection.Close();
+                return false;
             }
             else
             {
-                return true;
                 sqlConnection.Close();
+                return true;
             }
         }
 
