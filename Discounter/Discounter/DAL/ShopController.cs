@@ -14,21 +14,23 @@ namespace DAL
         public static Shop CreateShop(Trademark trademark, string address)
         {
             Shop shop = new Shop(trademark, address);
-            SqlConnection sqlConnection = new SqlConnection(Common.ConnectionString);
-            sqlConnection.Open();
-            SqlCommand cmd = sqlConnection.CreateCommand();
-            try
+            if (shop.IsValid())
             {
-                cmd.CommandText = $"INSERT INTO Shop VALUES ('{address}', {trademark.ID});";
-                cmd.ExecuteNonQuery();
+                SqlConnection sqlConnection = new SqlConnection(Common.ConnectionString);
+                sqlConnection.Open();
+                SqlCommand cmd = sqlConnection.CreateCommand();
+                try
+                {
+                    cmd.CommandText = $"INSERT INTO Shop VALUES ('{address}', {trademark.ID});";
+                    cmd.ExecuteNonQuery();
+                }
+                catch
+                {
+                    shop = null;
+                }
+                sqlConnection.Close();
             }
-            catch
-            {
-                shop = null;
-            }
-            sqlConnection.Close();
             return shop;
-
         }
 
         public static Shop GetShop(int id)
@@ -125,21 +127,26 @@ namespace DAL
 
         public static bool UpdateShop(Shop shop, string address)
         {
-            SqlConnection sqlConnection = new SqlConnection(Common.ConnectionString);
-            sqlConnection.Open();
-            SqlCommand cmd = sqlConnection.CreateCommand();
-            try
+            shop.Address = address;
+
+            if (shop.IsValid())
             {
-                cmd.CommandText = $"UPDATE Shop SET Address = '{address}' WHERE Id = {shop.ID};";
-                cmd.ExecuteNonQuery();
-                sqlConnection.Close();
-                shop.Address = address;
-                return true;
+                SqlConnection sqlConnection = new SqlConnection(Common.ConnectionString);
+                sqlConnection.Open();
+                SqlCommand cmd = sqlConnection.CreateCommand();
+                try
+                {
+                    cmd.CommandText = $"UPDATE Shop SET Address = '{address}' WHERE Id = {shop.ID};";
+                    cmd.ExecuteNonQuery();
+                    sqlConnection.Close();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
             }
-            catch
-            {
-                return false;
-            }
+            return false;
         }
 
         public static bool DeleteShop(Shop shop)

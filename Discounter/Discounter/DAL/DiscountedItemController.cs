@@ -16,33 +16,37 @@ namespace DAL
         public static DiscountedItem CreateDiscountedItem(string name, ItemType type, string description, Shop shop, Bitmap picture)
         {
             DiscountedItem item = new DiscountedItem(name, type, description, shop, picture);
-            SqlConnection sqlConnection = new SqlConnection(Common.ConnectionString);
-            sqlConnection.Open();
-            SqlCommand cmd = sqlConnection.CreateCommand();
-            try
+
+            if (item.IsValid())
             {
-                cmd.CommandText = $"SELECT MAX(Id) FROM DiscountedItem + 1;";
-                int newItemId = (int)cmd.ExecuteScalar();
+                SqlConnection sqlConnection = new SqlConnection(Common.ConnectionString);
+                sqlConnection.Open();
+                SqlCommand cmd = sqlConnection.CreateCommand();
+                try
+                {
+                    cmd.CommandText = $"SELECT MAX(Id) FROM DiscountedItem + 1;";
+                    int newItemId = (int)cmd.ExecuteScalar();
 
-                cmd.CommandText = $"INSERT INTO DiscountedItem VALUES ('{newItemId}', '{name}', '{description}', '{type.ToString()}', {shop.ID});";
-                cmd.ExecuteNonQuery();
+                    cmd.CommandText = $"INSERT INTO DiscountedItem VALUES ('{newItemId}', '{name}', '{description}', '{type.ToString()}', {shop.ID});";
+                    cmd.ExecuteNonQuery();
 
-                cmd.CommandText = $"INSERT INTO ItemPicture VALUES ({newItemId}, @photo);";
+                    cmd.CommandText = $"INSERT INTO ItemPicture VALUES ({newItemId}, @photo);";
 
-                MemoryStream ms = new MemoryStream();
-                picture.Save(ms, ImageFormat.Png);
-                byte[] photo_array = new byte[ms.Length];
-                ms.Position = 0;
-                ms.Read(photo_array, 0, photo_array.Length);
-                cmd.Parameters.AddWithValue("@photo", photo_array);
+                    MemoryStream ms = new MemoryStream();
+                    picture.Save(ms, ImageFormat.Png);
+                    byte[] photo_array = new byte[ms.Length];
+                    ms.Position = 0;
+                    ms.Read(photo_array, 0, photo_array.Length);
+                    cmd.Parameters.AddWithValue("@photo", photo_array);
 
-                cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
+                }
+                catch
+                {
+                    item = null;
+                }
+                sqlConnection.Close();
             }
-            catch
-            {
-                item = null;
-            }
-            sqlConnection.Close();
             return item;
         }
 
@@ -145,36 +149,39 @@ namespace DAL
 
         public static bool UpdateDiscountedItem(DiscountedItem item, string name, string description, Bitmap picture)
         {
-            SqlConnection sqlConnection = new SqlConnection(Common.ConnectionString);
-            sqlConnection.Open();
-            SqlCommand cmd = sqlConnection.CreateCommand();
-            try
+            item.Name = name;
+            item.Description = description;
+            item.SetPicture(picture);
+
+            if (item.IsValid())
             {
-                cmd.CommandText = $"UPDATE DiscountedItem SET Name = '{name}', Description = '{description}', WHERE Id = {item.ID};";
-                cmd.ExecuteNonQuery();
-                cmd.CommandText = $"UPDATE ItemPicture SET Picture = @photo WHERE ItemID = {item.ID};";
+                SqlConnection sqlConnection = new SqlConnection(Common.ConnectionString);
+                sqlConnection.Open();
+                SqlCommand cmd = sqlConnection.CreateCommand();
+                try
+                {
+                    cmd.CommandText = $"UPDATE DiscountedItem SET Name = '{name}', Description = '{description}', WHERE Id = {item.ID};";
+                    cmd.ExecuteNonQuery();
+                    cmd.CommandText = $"UPDATE ItemPicture SET Picture = @photo WHERE ItemID = {item.ID};";
 
-                MemoryStream ms = new MemoryStream();
-                picture.Save(ms, ImageFormat.Png);
-                byte[] photo_array = new byte[ms.Length];
-                ms.Position = 0;
-                ms.Read(photo_array, 0, photo_array.Length);
-                cmd.Parameters.AddWithValue("@photo", photo_array);
+                    MemoryStream ms = new MemoryStream();
+                    picture.Save(ms, ImageFormat.Png);
+                    byte[] photo_array = new byte[ms.Length];
+                    ms.Position = 0;
+                    ms.Read(photo_array, 0, photo_array.Length);
+                    cmd.Parameters.AddWithValue("@photo", photo_array);
 
-                cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
 
-                sqlConnection.Close();
-
-                item.Name = name;
-                item.Description = description;
-                item.SetPicture(picture);
-
-                return true;
+                    sqlConnection.Close();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
             }
-            catch
-            {
-                return false;
-            }
+            return false;
         }
 
         public static bool DeleteDiscountedItem(DiscountedItem item)

@@ -14,19 +14,23 @@ namespace DAL
         public static Trademark CreateTrademark(string name, string description)
         {
             Trademark trademark = new Trademark(name, description);
-            SqlConnection sqlConnection = new SqlConnection(Common.ConnectionString);
-            sqlConnection.Open();
-            SqlCommand cmd = sqlConnection.CreateCommand();
-            try
+
+            if (trademark.IsValid())
             {
-                cmd.CommandText = $"INSERT INTO Trademark VALUES ('{name}', '{description}');";
-                cmd.ExecuteNonQuery();
+                SqlConnection sqlConnection = new SqlConnection(Common.ConnectionString);
+                sqlConnection.Open();
+                SqlCommand cmd = sqlConnection.CreateCommand();
+                try
+                {
+                    cmd.CommandText = $"INSERT INTO Trademark VALUES ('{name}', '{description}');";
+                    cmd.ExecuteNonQuery();
+                }
+                catch
+                {
+                    trademark = null;
+                }
+                sqlConnection.Close();
             }
-            catch
-            {
-                trademark = null;
-            }
-            sqlConnection.Close();
             return trademark;
         }
 
@@ -98,22 +102,27 @@ namespace DAL
 
         public static bool UpdateTrademark(Trademark trademark, string name, string description)
         {
-            SqlConnection sqlConnection = new SqlConnection(Common.ConnectionString);
-            sqlConnection.Open();
-            SqlCommand cmd = sqlConnection.CreateCommand();
-            try
+            trademark.Name = name;
+            trademark.Description = description;
+
+            if (trademark.IsValid())
             {
-                cmd.CommandText = $"UPDATE Trademark SET Name = '{name}', Description = '{description}' WHERE Id = {trademark.ID};";
-                cmd.ExecuteNonQuery();
-                sqlConnection.Close();
-                trademark.Name = name;
-                trademark.Description = description;
-                return true;
+                SqlConnection sqlConnection = new SqlConnection(Common.ConnectionString);
+                sqlConnection.Open();
+                SqlCommand cmd = sqlConnection.CreateCommand();
+                try
+                {
+                    cmd.CommandText = $"UPDATE Trademark SET Name = '{name}', Description = '{description}' WHERE Id = {trademark.ID};";
+                    cmd.ExecuteNonQuery();
+                    sqlConnection.Close();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
             }
-            catch
-            {
-                return false;
-            }
+            return false;
         }
 
         public static bool DeleteTrademark(Trademark trademark) 
