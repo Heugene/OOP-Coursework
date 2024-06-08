@@ -13,6 +13,7 @@
       <HashCode>AAgIAAACAAQgkAAAAAgAAAQEAAgACAACAAACAAQAAIA=</HashCode>
       <FileName>Discount.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Domain.DiscountedItem">
     <Position X="11.5" Y="0.5" Width="2.5" />
@@ -20,6 +21,7 @@
       <HashCode>AAAAgAAAAAAggAAgAAgAAAQAAACAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>DiscountedItem.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Domain.DiscountRequest">
     <Position X="14.25" Y="5" Width="2.75" />
@@ -27,6 +29,7 @@
       <HashCode>AAAAAAAAAAAAgAAIAAgAAIAAAAAABIAAAAAAAAAAAAA=</HashCode>
       <FileName>DiscountRequest.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Domain.Person">
     <Position X="6.25" Y="0.5" Width="2.25" />
@@ -34,6 +37,7 @@
       <HashCode>AAAAAAAAACAAgAAAEAgAQAQAAAAAAAACAgAAAAAAAAA=</HashCode>
       <FileName>Person.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Domain.Shop">
     <Position X="9" Y="0.5" Width="2" />
@@ -41,6 +45,7 @@
       <HashCode>AAAAAAAAAAAAgAAAAAgAAAAAAAAAEAACAAAAAAAAAAA=</HashCode>
       <FileName>Shop.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Domain.ShopManager">
     <Position X="7.75" Y="4.5" Width="2.75" />
@@ -55,12 +60,13 @@
       <HashCode>AAAAAAAAAAAggAAAAAgAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Trademark.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
-  <Interface Name="Domain.IAuthorizable">
-    <Position X="7.75" Y="8.25" Width="2.75" />
+  <Interface Name="Domain.IValidable">
+    <Position X="8.25" Y="8" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
-      <FileName>IAuthorizable.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IValidable.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="Domain.ItemType">
