@@ -63,6 +63,21 @@ namespace DAL
             return manager;
         }
 
+        public static ShopManager GetShopManager(int id)
+        {
+            SqlConnection sqlConnection = new SqlConnection(Common.ConnectionString);
+            sqlConnection.Open();
+            SqlCommand cmd = sqlConnection.CreateCommand();
+            cmd.CommandText = $"SELECT * FROM ShopManager WHERE Id = {id};";
+            var result = cmd.ExecuteReader();
+            ShopManager manager = null;
+            result.Read();
+            Shop shop = DAL.ShopController.GetShop(int.Parse(result["ShopID"].ToString()));
+            manager = new ShopManager(Convert.ToInt32(result["Id"]), result["Name"].ToString(), Enum.Parse<UserRole>(result["Role"].ToString()), result["PhoneNumber"].ToString(), result["Email"].ToString(), "", shop);
+            sqlConnection.Close();
+            return manager;
+        }
+
 
         public static ShopManager CreateShopManager(string name, string phoneNumber, string email, string password, Shop managedShop)
         {
