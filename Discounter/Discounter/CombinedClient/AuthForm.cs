@@ -33,7 +33,11 @@ namespace CombinedClient
             }
             if (radioButton2.Checked) 
             {
-                throw new NotImplementedException();
+                if (DAL.ManagerController.Identificate(login))
+                {
+                    return true;
+                }
+                else return false;
             }
             return false;
         }
@@ -51,7 +55,11 @@ namespace CombinedClient
             }
             if (radioButton2.Checked)
             {
-                throw new NotImplementedException();
+                if (DAL.ManagerController.Authentificate(login, password))
+                {
+                    return true;
+                }
+                else return false;
             }
             return false;
         }
@@ -72,7 +80,7 @@ namespace CombinedClient
                     }
                     if (radioButton2.Checked)
                     {
-                        throw new NotImplementedException();
+                        person = DAL.ManagerController.GetShopManager(textBoxLogin.Text, maskedTextBox1.Text);
                     }
                     Close();
                 }

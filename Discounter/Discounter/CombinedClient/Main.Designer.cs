@@ -90,6 +90,7 @@
             вийтиToolStripMenuItem.Name = "вийтиToolStripMenuItem";
             вийтиToolStripMenuItem.Size = new Size(75, 31);
             вийтиToolStripMenuItem.Text = "Вийти";
+            вийтиToolStripMenuItem.Click += вийтиToolStripMenuItem_Click;
             // 
             // адмініструванняToolStripMenuItem
             // 

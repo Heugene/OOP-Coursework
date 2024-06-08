@@ -6,7 +6,7 @@ namespace CombinedClient
     {
         static string searchBarPlaceholder = "Ïîøóê...";
         static Person? authorizedUser = null;
-        
+
 
         public Main()
         {
@@ -19,7 +19,7 @@ namespace CombinedClient
             Deauthorize();
         }
 
-        void toolStripTextBoxSearch_Enter(object sender, EventArgs e) 
+        void toolStripTextBoxSearch_Enter(object sender, EventArgs e)
         {
             if (toolStripTextBoxSearch.Text == searchBarPlaceholder)
             {
@@ -30,17 +30,16 @@ namespace CombinedClient
         void toolStripTextBoxSearch_Leave(object sender, EventArgs e)
         {
             if (toolStripTextBoxSearch.Text == "")
-            { 
+            {
                 toolStripTextBoxSearch.Text = searchBarPlaceholder;
             }
         }
 
-        void óâ³éòèToolStripMenuItem_Click(object sender, EventArgs e) 
+        void óâ³éòèToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AuthForm authForm = new AuthForm();
             authForm.ShowDialog();
             authorizedUser = authForm.person;
-            MessageBox.Show(authorizedUser.Email);
             if (!Authorize())
             {
                 MessageBox.Show("Ùîñü ï³øëî íå òàê...", "Ïîìèëêà àâòîğèçàö³¿!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -86,6 +85,10 @@ namespace CombinedClient
             àäì³í³ñòğóâàííÿToolStripMenuItem.Visible = false;
             ïğîïîçèö³¿ToolStripMenuItem.Visible = false;
         }
-        
+
+        private void âèéòèToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Deauthorize();
+        }
     }
 }
