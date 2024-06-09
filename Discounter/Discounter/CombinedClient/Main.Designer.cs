@@ -104,24 +104,28 @@
             магазиниToolStripMenuItem.Name = "магазиниToolStripMenuItem";
             магазиниToolStripMenuItem.Size = new Size(304, 34);
             магазиниToolStripMenuItem.Text = "Магазини..";
+            магазиниToolStripMenuItem.Click += магазиниToolStripMenuItem_Click;
             // 
             // торговіМаркиToolStripMenuItem
             // 
             торговіМаркиToolStripMenuItem.Name = "торговіМаркиToolStripMenuItem";
             торговіМаркиToolStripMenuItem.Size = new Size(304, 34);
             торговіМаркиToolStripMenuItem.Text = "Торгові марки..";
+            торговіМаркиToolStripMenuItem.Click += торговіМаркиToolStripMenuItem_Click;
             // 
             // менеджериМагазинівToolStripMenuItem
             // 
             менеджериМагазинівToolStripMenuItem.Name = "менеджериМагазинівToolStripMenuItem";
             менеджериМагазинівToolStripMenuItem.Size = new Size(304, 34);
             менеджериМагазинівToolStripMenuItem.Text = "Менеджери магазинів..";
+            менеджериМагазинівToolStripMenuItem.Click += менеджериМагазинівToolStripMenuItem_Click;
             // 
             // запитиНаЗнижкиToolStripMenuItem
             // 
             запитиНаЗнижкиToolStripMenuItem.Name = "запитиНаЗнижкиToolStripMenuItem";
             запитиНаЗнижкиToolStripMenuItem.Size = new Size(304, 34);
             запитиНаЗнижкиToolStripMenuItem.Text = "Запити на знижки..";
+            запитиНаЗнижкиToolStripMenuItem.Click += запитиНаЗнижкиToolStripMenuItem_Click;
             // 
             // toolStripMenuItem1
             // 
@@ -138,14 +142,16 @@
             // товариToolStripMenuItem
             // 
             товариToolStripMenuItem.Name = "товариToolStripMenuItem";
-            товариToolStripMenuItem.Size = new Size(184, 34);
+            товариToolStripMenuItem.Size = new Size(270, 34);
             товариToolStripMenuItem.Text = "Товари..";
+            товариToolStripMenuItem.Click += товариToolStripMenuItem_Click;
             // 
             // знижкиToolStripMenuItem
             // 
             знижкиToolStripMenuItem.Name = "знижкиToolStripMenuItem";
-            знижкиToolStripMenuItem.Size = new Size(184, 34);
+            знижкиToolStripMenuItem.Size = new Size(270, 34);
             знижкиToolStripMenuItem.Text = "Знижки..";
+            знижкиToolStripMenuItem.Click += знижкиToolStripMenuItem_Click;
             // 
             // toolStripMenuItem2
             // 

@@ -128,7 +128,7 @@ namespace CombinedClient
                     flowLayoutPanel1.Controls.Clear();
                 }
 
-                for (int i = 0; i < itemList.Length; i++) 
+                for (int i = 0; i < itemList.Length; i++)
                 {
                     itemList[i] = new DiscountListItem();
                     itemList[i].Discount = discounts[i];
@@ -166,13 +166,13 @@ namespace CombinedClient
 
         private List<Discount> DeserializeDiscounts(string path)
         {
-            List<Discount> discounts= new List<Discount>();
+            List<Discount> discounts = new List<Discount>();
             try
             {
                 List<string> lines = new List<string>();
                 lines = File.ReadAllLines(path).ToList();
 
-                foreach (var item in lines) 
+                foreach (var item in lines)
                 {
                     Discount? discount = JsonSerializer.Deserialize<Discount>(item);
                     if (discount is not null)
@@ -204,6 +204,42 @@ namespace CombinedClient
                 itemList[i].Discount = discounts[i];
                 flowLayoutPanel1.Controls.Add(itemList[i]);
             }
+        }
+
+        private void òîğãîâ³ÌàğêèToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TrademarkCRUD form = new TrademarkCRUD();
+            form.ShowDialog();
+        }
+
+        private void ìàãàçèíèToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShopCRUD form = new ShopCRUD();
+            form.ShowDialog();
+        }
+
+        private void ìåíåäæåğèÌàãàçèí³âToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ManagerCRUD form = new ManagerCRUD();
+            form.ShowDialog();
+        }
+
+        private void çàïèòèÍàÇíèæêèToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DiscountRequestReview form = new DiscountRequestReview();
+            form.ShowDialog();
+        }
+
+        private void òîâàğèToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DiscountedItemCRUD form = new DiscountedItemCRUD();
+            form.ShowDialog();
+        }
+
+        private void çíèæêèToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DiscountCRUD form = new DiscountCRUD();
+            form.ShowDialog();
         }
     }
 }
