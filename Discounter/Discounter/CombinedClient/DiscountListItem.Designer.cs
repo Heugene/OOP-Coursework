@@ -71,7 +71,7 @@
             labelStart_End.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             labelStart_End.AutoSize = true;
             labelStart_End.Font = new Font("Segoe UI", 12F);
-            labelStart_End.Location = new Point(749, 110);
+            labelStart_End.Location = new Point(649, 110);
             labelStart_End.Name = "labelStart_End";
             labelStart_End.Size = new Size(237, 32);
             labelStart_End.TabIndex = 3;
@@ -91,7 +91,6 @@
             // 
             labelNewPrice.AutoSize = true;
             labelNewPrice.Font = new Font("Segoe UI", 12F);
-            labelNewPrice.ForeColor = Color.DarkRed;
             labelNewPrice.Location = new Point(159, 108);
             labelNewPrice.Name = "labelNewPrice";
             labelNewPrice.Size = new Size(133, 32);
@@ -103,12 +102,11 @@
             labelTrademark.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             labelTrademark.AutoSize = true;
             labelTrademark.Font = new Font("Segoe UI", 12F);
-            labelTrademark.Location = new Point(794, 3);
+            labelTrademark.Location = new Point(694, 3);
             labelTrademark.Name = "labelTrademark";
             labelTrademark.Size = new Size(192, 32);
             labelTrademark.TabIndex = 6;
             labelTrademark.Text = "Trademark name";
-            labelTrademark.TextAlign = ContentAlignment.MiddleRight;
             // 
             // DiscountListItem
             // 
@@ -123,7 +121,7 @@
             Controls.Add(labelDiscName);
             Controls.Add(pictureBox);
             Name = "DiscountListItem";
-            Size = new Size(1000, 160);
+            Size = new Size(900, 157);
             Click += DiscountListItem_Click;
             MouseEnter += DiscountListItem_MouseEnter;
             MouseLeave += DiscountListItem_MouseLeave;

@@ -64,14 +64,12 @@ namespace DAL
                 Shop shop = DAL.ShopController.GetShop(int.Parse(result["ShopID"].ToString()));
                 item = new DiscountedItem(int.Parse(result["Id"].ToString()), result["Name"].ToString(), Enum.Parse<ItemType>(result["Type"].ToString()), result["Description"].ToString(), shop);
 
-                // ТИМЧАСОВО ВІДКЛЮЧИВ ЗАВАНТАЖЕННЯ КАРТИНКИ. ВИДАЄ ЕКСЕПШЕН, ПОТІМ РОЗБЕРУСЬ.
-
-                //cmd.CommandText = $"SELECT Picture FROM ItemPicture WHERE ItemID = {item.ID}";
-                //var imageReader = cmd.ExecuteReader();
-                //imageReader.Read();
-                //byte[] imageByteArray = (byte[])(imageReader["Picture"]);
-                //MemoryStream ms = new MemoryStream(imageByteArray);
-                //item.SetPicture(new Bitmap(Image.FromStream(ms)));
+                cmd.CommandText = $"SELECT Picture FROM ItemPicture WHERE ItemID = {item.ID}";
+                var imageReader = cmd.ExecuteReader();
+                imageReader.Read();
+                byte[] imageByteArray = (byte[])(imageReader["Picture"]);
+                MemoryStream ms = new MemoryStream(imageByteArray);
+                item.SetPicture(new Bitmap(Image.FromStream(ms)));
             }
             catch
             {

@@ -1,6 +1,4 @@
 using Domain;
-using System.Text;
-using System.Text.Json;
 
 namespace CombinedClient
 {
@@ -9,7 +7,6 @@ namespace CombinedClient
         static string searchBarPlaceholder = "Пошук...";
         static Person? authorizedUser = null;
 
-        static string jsonPath = Application.StartupPath + @"\discounts.json";
 
         public Main()
         {
@@ -20,8 +17,7 @@ namespace CombinedClient
         {
             toolStripTextBoxSearch.Text = searchBarPlaceholder;
             Deauthorize();
-            //PopulateItemsTEST();
-            LoadDiscounts();
+            PopulateItemsTEST();
         }
 
         void toolStripTextBoxSearch_Enter(object sender, EventArgs e)
@@ -98,7 +94,7 @@ namespace CombinedClient
 
         private void PopulateItemsTEST()
         {
-            DiscountListItem[] list = new DiscountListItem[20];
+            DiscountListItem[] list= new DiscountListItem[20];
             Trademark TEST_trademark = new Trademark(1, "Тест ТМ", "Тестова торгова марка.");
             Shop TEST_shop = new Shop(1, TEST_trademark, "Тестова адреса");
             DiscountedItem TEST_item = new DiscountedItem(1, "Тестова ковбаса", ItemType.Product, "Ковбасний виріб тествого ґатунку", TEST_shop);
@@ -111,98 +107,6 @@ namespace CombinedClient
                 list[i] = new DiscountListItem();
                 list[i].Discount = new Discount(i + 1, "НЕЙМОВІРНІ ТЕСТИ", TEST_item, "Спеціальна акція тільки на період тесту інтерфейсу", 25.99m, 15.99m, DateTime.Now, DateTime.Now.AddDays(7));
                 flowLayoutPanel1.Controls.Add(list[i]);
-            }
-        }
-
-        private void LoadDiscounts()
-        {
-            try
-            {
-                //throw new Exception("Deserialization Test");
-
-                List<Discount> discounts = DAL.DiscountController.GetAllActualDiscounts();
-                DiscountListItem[] itemList = new DiscountListItem[discounts.Count];
-
-                if (flowLayoutPanel1.Controls.Count > 0)
-                {
-                    flowLayoutPanel1.Controls.Clear();
-                }
-
-                for (int i = 0; i < itemList.Length; i++) 
-                {
-                    itemList[i] = new DiscountListItem();
-                    itemList[i].Discount = discounts[i];
-                    flowLayoutPanel1.Controls.Add(itemList[i]);
-                }
-
-
-                SerializeDiscounts(discounts, jsonPath);
-            }
-            catch
-            {
-                MessageBox.Show("Щось пішло не так... Будуть завантажені збережені знижки.", "Помилка завантаження знижок!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                LoadDiscountsFromFile();
-            }
-        }
-
-        private void SerializeDiscounts(List<Discount> discounts, string path)
-        {
-            try
-            {
-                StringBuilder jsonstring = new StringBuilder();
-
-                foreach (var item in discounts)
-                {
-                    jsonstring.AppendLine(JsonSerializer.Serialize<Discount>(item));
-                }
-
-                File.WriteAllText(path, jsonstring.ToString());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Щось пішло не так при збережені знижок. \nПомилка: {ex.Message}", "Помилка збереження знижок!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private List<Discount> DeserializeDiscounts(string path)
-        {
-            List<Discount> discounts= new List<Discount>();
-            try
-            {
-                List<string> lines = new List<string>();
-                lines = File.ReadAllLines(path).ToList();
-
-                foreach (var item in lines) 
-                {
-                    Discount? discount = JsonSerializer.Deserialize<Discount>(item);
-                    if (discount is not null)
-                    {
-                        discounts.Add(discount);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Щось пішло не так при завантаженні збережених знижок. \nПомилка: {ex.Message}", "Помилка зчитування збережених знижок!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return discounts;
-        }
-
-        private void LoadDiscountsFromFile()
-        {
-            List<Discount> discounts = DeserializeDiscounts(jsonPath);
-            DiscountListItem[] itemList = new DiscountListItem[discounts.Count];
-
-            if (flowLayoutPanel1.Controls.Count > 0)
-            {
-                flowLayoutPanel1.Controls.Clear();
-            }
-
-            for (int i = 0; i < itemList.Length; i++)
-            {
-                itemList[i] = new DiscountListItem();
-                itemList[i].Discount = discounts[i];
-                flowLayoutPanel1.Controls.Add(itemList[i]);
             }
         }
     }
