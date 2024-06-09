@@ -14,6 +14,7 @@ namespace CombinedClient
     public partial class DiscountListItem : UserControl
     {
         Discount discount;
+        string currency = " грн";
 
         public Discount Discount
         {
@@ -23,10 +24,10 @@ namespace CombinedClient
                 discount = value;
                 labelDiscName.Text = "Акція: " + discount.Name;
                 labelItemName.Text = discount.Item.Name;
-                labelOldPrice.Text = "Стара ціна: " + discount.OldPrice.ToString();
-                labelNewPrice.Text = "Нова ціна: " + discount.NewPrice.ToString();
+                labelOldPrice.Text = "Стара ціна: " + discount.OldPrice.ToString("0.00") + currency;
+                labelNewPrice.Text = "Нова ціна: " + discount.NewPrice.ToString("0.00") + currency + $" (-{discount.Percentage}%)";
                 labelStart_End.Text = $"{discount.StartDateTime} - {discount.EndDateTime}";
-                labelTrademark.Text = "Торгова марка: " + discount.Item.Shop.Trademark.Name;
+                labelTrademark.Text = "ТМ: " + discount.Item.Shop.Trademark.Name;
                 pictureBox.Image = discount.Item.Picture;
             }
         }
