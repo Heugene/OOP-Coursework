@@ -34,6 +34,7 @@
             labelStart_End = new Label();
             labelOldPrice = new Label();
             labelNewPrice = new Label();
+            labelTrademark = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox).BeginInit();
             SuspendLayout();
             // 
@@ -70,7 +71,7 @@
             labelStart_End.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             labelStart_End.AutoSize = true;
             labelStart_End.Font = new Font("Segoe UI", 12F);
-            labelStart_End.Location = new Point(361, 110);
+            labelStart_End.Location = new Point(649, 110);
             labelStart_End.Name = "labelStart_End";
             labelStart_End.Size = new Size(237, 32);
             labelStart_End.TabIndex = 3;
@@ -96,10 +97,23 @@
             labelNewPrice.TabIndex = 5;
             labelNewPrice.Text = "New price: ";
             // 
+            // labelTrademark
+            // 
+            labelTrademark.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            labelTrademark.AutoSize = true;
+            labelTrademark.Font = new Font("Segoe UI", 12F);
+            labelTrademark.Location = new Point(694, 3);
+            labelTrademark.Name = "labelTrademark";
+            labelTrademark.Size = new Size(192, 32);
+            labelTrademark.TabIndex = 6;
+            labelTrademark.Text = "Trademark name";
+            // 
             // DiscountListItem
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Linen;
+            Controls.Add(labelTrademark);
             Controls.Add(labelNewPrice);
             Controls.Add(labelOldPrice);
             Controls.Add(labelStart_End);
@@ -107,7 +121,10 @@
             Controls.Add(labelDiscName);
             Controls.Add(pictureBox);
             Name = "DiscountListItem";
-            Size = new Size(612, 157);
+            Size = new Size(900, 157);
+            Click += DiscountListItem_Click;
+            MouseEnter += DiscountListItem_MouseEnter;
+            MouseLeave += DiscountListItem_MouseLeave;
             ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -121,5 +138,6 @@
         private Label labelStart_End;
         private Label labelOldPrice;
         private Label labelNewPrice;
+        private Label labelTrademark;
     }
 }

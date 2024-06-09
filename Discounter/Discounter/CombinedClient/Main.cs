@@ -17,6 +17,7 @@ namespace CombinedClient
         {
             toolStripTextBoxSearch.Text = searchBarPlaceholder;
             Deauthorize();
+            PopulateItemsTEST();
         }
 
         void toolStripTextBoxSearch_Enter(object sender, EventArgs e)
@@ -89,6 +90,24 @@ namespace CombinedClient
         private void вийтиToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Deauthorize();
+        }
+
+        private void PopulateItemsTEST()
+        {
+            DiscountListItem[] list= new DiscountListItem[20];
+            Trademark TEST_trademark = new Trademark(1, "Тест ТМ", "Тестова торгова марка.");
+            Shop TEST_shop = new Shop(1, TEST_trademark, "Тестова адреса");
+            DiscountedItem TEST_item = new DiscountedItem(1, "Тестова ковбаса", ItemType.Product, "Ковбасний виріб тествого ґатунку", TEST_shop);
+            if (flowLayoutPanel1.Controls.Count > 0)
+            {
+                flowLayoutPanel1.Controls.Clear();
+            }
+            for (int i = 0; i < list.Length; i++)
+            {
+                list[i] = new DiscountListItem();
+                list[i].Discount = new Discount(i + 1, "НЕЙМОВІРНІ ТЕСТИ", TEST_item, "Спеціальна акція тільки на період тесту інтерфейсу", 25.99m, 15.99m, DateTime.Now, DateTime.Now.AddDays(7));
+                flowLayoutPanel1.Controls.Add(list[i]);
+            }
         }
     }
 }

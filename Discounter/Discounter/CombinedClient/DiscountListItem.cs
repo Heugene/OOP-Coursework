@@ -17,23 +17,39 @@ namespace CombinedClient
 
         public Discount Discount
         {
-            get { return  discount; }
-            set 
+            get { return discount; }
+            set
             {
                 discount = value;
-                labelDiscName.Text = discount.Name;
+                labelDiscName.Text = "Акція: " + discount.Name;
                 labelItemName.Text = discount.Item.Name;
-                labelOldPrice.Text = discount.OldPrice.ToString();
-                labelNewPrice.Text = discount.NewPrice.ToString();
+                labelOldPrice.Text = "Стара ціна: " + discount.OldPrice.ToString();
+                labelNewPrice.Text = "Нова ціна: " + discount.NewPrice.ToString();
                 labelStart_End.Text = $"{discount.StartDateTime} - {discount.EndDateTime}";
+                labelTrademark.Text = "Торгова марка: " + discount.Item.Shop.Trademark.Name;
                 pictureBox.Image = discount.Item.Picture;
             }
         }
-        
+
 
         public DiscountListItem()
         {
             InitializeComponent();
+        }
+
+        private void DiscountListItem_MouseEnter(object sender, EventArgs e)
+        {
+            //this.BackColor = Color.Linen;
+        }
+
+        private void DiscountListItem_MouseLeave(object sender, EventArgs e)
+        {
+            //this.BackColor = Color.Bisque;
+        }
+
+        private void DiscountListItem_Click(object sender, EventArgs e)
+        {
+            // Відкрити форму для перегляду повної інформації про знижку
         }
     }
 }
