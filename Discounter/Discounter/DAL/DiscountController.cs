@@ -110,7 +110,7 @@ namespace DAL
             List<Discount> list = new List<Discount>();
             try
             {
-                cmd.CommandText = $"SELECT * FROM Discount WHERE Rejected = 0 AND Approved = 1 AND EndDateTime <= '{DateTime.Now}';";
+                cmd.CommandText = $"SELECT * FROM Discount WHERE WasRejected = 0 AND IsApproved = 1 AND EndDateTime <= '{DateTime.Now}';";
                 var result = cmd.ExecuteReader();
                 DiscountedItem item;
                 while (result.Read())
@@ -163,7 +163,7 @@ namespace DAL
             SqlCommand cmd = sqlConnection.CreateCommand();
             try
             {
-                cmd.CommandText = $"UPDATE Discount SET Approved = 1 WHERE Id = {discountRequest.RequestedDiscount.ID};";
+                cmd.CommandText = $"UPDATE Discount SET IsApproved = 1 WHERE Id = {discountRequest.RequestedDiscount.ID};";
                 cmd.ExecuteNonQuery();
                 cmd.CommandText = $"UPDATE DiscountRequest SET ViewedDateTime = '{DateTime.Now}'";
                 sqlConnection.Close();
@@ -183,7 +183,7 @@ namespace DAL
             SqlCommand cmd = sqlConnection.CreateCommand();
             try
             {
-                cmd.CommandText = $"UPDATE Discount SET Rejected = 1 WHERE Id = {discountRequest.RequestedDiscount.ID};";
+                cmd.CommandText = $"UPDATE Discount SET WasRejected = 1 WHERE Id = {discountRequest.RequestedDiscount.ID};";
                 cmd.ExecuteNonQuery();
                 cmd.CommandText = $"UPDATE DiscountRequest SET ViewedDateTime = '{DateTime.Now}'";
                 sqlConnection.Close();

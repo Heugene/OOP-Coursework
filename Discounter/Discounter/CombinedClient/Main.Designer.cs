@@ -56,7 +56,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { знайтиToolStripMenuItem, toolStripTextBoxSearch, увійтиToolStripMenuItem, вийтиToolStripMenuItem, адмініструванняToolStripMenuItem, toolStripMenuItem1, пропозиціїToolStripMenuItem, toolStripMenuItem2 });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1178, 35);
+            menuStrip1.Size = new Size(1258, 35);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -167,7 +167,7 @@
             panel1.Dock = DockStyle.Bottom;
             panel1.Location = new Point(200, 704);
             panel1.Name = "panel1";
-            panel1.Size = new Size(978, 40);
+            panel1.Size = new Size(1058, 40);
             panel1.TabIndex = 2;
             // 
             // flowLayoutPanel1
@@ -176,14 +176,14 @@
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.Location = new Point(200, 35);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(978, 669);
+            flowLayoutPanel1.Size = new Size(1058, 669);
             flowLayoutPanel1.TabIndex = 3;
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1178, 744);
+            ClientSize = new Size(1258, 744);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(panel1);
             Controls.Add(SidePanel);
