@@ -97,15 +97,15 @@ namespace DAL
                     list.Add(new DiscountedItem(int.Parse(result["Id"].ToString()), result["Name"].ToString(), Enum.Parse<ItemType>(result["Type"].ToString()), result["Description"].ToString(), shop));
                 }
 
-                foreach (var item in list)
-                {
-                    cmd.CommandText = $"SELECT Picture FROM ItemPicture WHERE ItemID = {item.ID}";
-                    var imageReader = cmd.ExecuteReader();
-                    imageReader.Read();
-                    byte[] imageByteArray = (byte[])(imageReader["Picture"]);
-                    MemoryStream ms = new MemoryStream(imageByteArray);
-                    item.SetPicture(new Bitmap(Image.FromStream(ms)));
-                }
+                //foreach (var item in list)
+                //{
+                //    cmd.CommandText = $"SELECT Picture FROM ItemPicture WHERE ItemID = {item.ID}";
+                //    var imageReader = cmd.ExecuteReader();
+                //    imageReader.Read();
+                //    byte[] imageByteArray = (byte[])(imageReader["Picture"]);
+                //    MemoryStream ms = new MemoryStream(imageByteArray);
+                //    item.SetPicture(new Bitmap(Image.FromStream(ms)));
+                //}
             }
             catch
             {
