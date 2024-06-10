@@ -92,7 +92,7 @@ namespace DAL
                 var result = cmd.ExecuteReader();
                 result.Read();
                 DiscountedItem item = DAL.DiscountedItemController.GetDiscountedItem(int.Parse(result["ItemID"].ToString()));
-                discount = new Discount(int.Parse(result["Id"].ToString()), result["Name"].ToString(), item, result["Description"].ToString(), (decimal)result["OldPrice"], (decimal)result["NewPrice"], DateTime.Parse(result["StartDateTime"].ToString()), DateTime.Parse(result["EndDateTime"].ToString()));
+                discount = new Discount(int.Parse(result["Id"].ToString()), result["Name"].ToString(), item, result["Description"].ToString(), (decimal)result["OldPrice"], (decimal)result["NewPrice"], DateTime.Parse(result["StartDateTime"].ToString()), DateTime.Parse(result["EndDateTime"].ToString()), bool.Parse(result["IsApproved"].ToString()), bool.Parse(result["WasRejected"].ToString()));
             }
             catch
             {
@@ -116,7 +116,7 @@ namespace DAL
                 while (result.Read())
                 {
                     item = DAL.DiscountedItemController.GetDiscountedItem(int.Parse(result["ItemID"].ToString()));
-                    list.Add(new Discount(int.Parse(result["Id"].ToString()), result["Name"].ToString(), item, result["Description"].ToString(), (decimal)result["OldPrice"], (decimal)result["NewPrice"], DateTime.Parse(result["StartDateTime"].ToString()), DateTime.Parse(result["EndDateTime"].ToString())));
+                    list.Add(new Discount(int.Parse(result["Id"].ToString()), result["Name"].ToString(), item, result["Description"].ToString(), (decimal)result["OldPrice"], (decimal)result["NewPrice"], DateTime.Parse(result["StartDateTime"].ToString()), DateTime.Parse(result["EndDateTime"].ToString()), bool.Parse(result["IsApproved"].ToString()), bool.Parse(result["WasRejected"].ToString())));
                 }
             }
             catch
