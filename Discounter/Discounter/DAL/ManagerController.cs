@@ -48,6 +48,31 @@ namespace DAL
             }
         }
 
+        public static List<ShopManager> GetAllShopManagers()
+        {
+            SqlConnection sqlConnection = new SqlConnection(Common.ConnectionString);
+            sqlConnection.Open();
+            SqlCommand cmd = sqlConnection.CreateCommand();
+            List<ShopManager> list = new List<ShopManager>();
+            Shop shop;
+            try
+            {
+                cmd.CommandText = $"SELECT * FROM ShopManager;";
+                var result = cmd.ExecuteReader();
+                while (result.Read())
+                {
+                    shop = DAL.ShopController.GetShop(int.Parse(result["ShopID"].ToString()));
+                    list.Add(new ShopManager(Convert.ToInt32(result["Id"]), result["Name"].ToString(), Enum.Parse<UserRole>(result["Role"].ToString()), result["PhoneNumber"].ToString(), result["Email"].ToString(), result["Password"].ToString(), shop));
+                }
+            }
+            catch
+            {
+                list = null;
+            }
+            sqlConnection.Close();
+            return list;
+        }
+
         public static ShopManager GetShopManager(string login, string password)
         {
             SqlConnection sqlConnection = new SqlConnection(Common.ConnectionString);
