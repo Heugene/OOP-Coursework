@@ -130,16 +130,17 @@ namespace DAL
                     Shop shop = DAL.ShopController.GetShop(int.Parse(result["ShopID"].ToString()));
                     list.Add(new DiscountedItem(int.Parse(result["Id"].ToString()), result["Name"].ToString(), Enum.Parse<ItemType>(result["Type"].ToString()), result["Description"].ToString(), shop));
                 }
+                result.Close();
 
-                foreach (var item in list)
-                {
-                    cmd.CommandText = $"SELECT Picture FROM ItemPicture WHERE ItemID = {item.ID}";
-                    var imageReader = cmd.ExecuteReader();
-                    imageReader.Read();
-                    byte[] imageByteArray = (byte[])(imageReader["Picture"]);
-                    MemoryStream ms = new MemoryStream(imageByteArray);
-                    item.SetPicture(new Bitmap(Image.FromStream(ms)));
-                }
+                //foreach (var item in list)
+                //{
+                //    cmd.CommandText = $"SELECT Picture FROM ItemPicture WHERE ItemID = {item.ID}";
+                //    var imageReader = cmd.ExecuteReader();
+                //    imageReader.Read();
+                //    byte[] imageByteArray = (byte[])(imageReader["Picture"]);
+                //    MemoryStream ms = new MemoryStream(imageByteArray);
+                //    item.SetPicture(new Bitmap(Image.FromStream(ms)));
+                //}
             }
             catch
             {
@@ -195,7 +196,7 @@ namespace DAL
             {
                 cmd.CommandText = $"DELETE FROM DiscountedItem WHERE Id = {item.ID};";
                 cmd.ExecuteNonQuery();
-                cmd.CommandText = $"DELETE FROM ItemPicture WHERE Id = {item.ID};";
+                cmd.CommandText = $"DELETE FROM ItemPicture WHERE ItemId = {item.ID};";
                 cmd.ExecuteNonQuery();
                 sqlConnection.Close();
                 return true;
