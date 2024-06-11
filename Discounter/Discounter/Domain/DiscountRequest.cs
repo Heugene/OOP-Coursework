@@ -30,7 +30,7 @@ namespace Domain
             ID = id;
         }
 
-        public DiscountRequest(int id, DateTime createdDateTime, ShopManager manager, Discount requestedDiscount, DateTime viewedDateTime) : this(id, createdDateTime, manager, requestedDiscount)
+        public DiscountRequest(int id, DateTime createdDateTime, ShopManager manager, Discount requestedDiscount, DateTime? viewedDateTime) : this(id, createdDateTime, manager, requestedDiscount)
         {
             ViewedDateTime = viewedDateTime;
         }
