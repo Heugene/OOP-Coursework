@@ -241,5 +241,10 @@ namespace CombinedClient
             DiscountCRUD form = new DiscountCRUD(authorizedUser as ShopManager);
             form.ShowDialog();
         }
+
+        private void ÓÌÓ‚ËÚËToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadDiscounts();
+        }
     }
 }
