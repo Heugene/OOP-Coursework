@@ -109,7 +109,7 @@ namespace CombinedClient
             for (int i = 0; i < list.Length; i++)
             {
                 list[i] = new DiscountListItem();
-                list[i].Discount = new Discount(i + 1, "ÍÅÉÌÎÂ²ÐÍ² ÒÅÑÒÈ", TEST_item, "Ñïåö³àëüíà àêö³ÿ ò³ëüêè íà ïåð³îä òåñòó ³íòåðôåéñó", 25.99m, 15.99m, DateTime.Now, DateTime.Now.AddDays(7));
+                list[i].Discount = new Discount(i + 1, "ÍÅÉÌÎÂ²ÐÍ² ÒÅÑÒÈ", TEST_item, "Ñïåö³àëüíà àêö³ÿ ò³ëüêè íà ïåð³îä òåñòó ³íòåðôåéñó", 25.99m, 15.99m, DateTime.Now, DateTime.Now.AddDays(7), true, false);
                 flowLayoutPanel1.Controls.Add(list[i]);
             }
         }
@@ -232,13 +232,13 @@ namespace CombinedClient
 
         private void òîâàðèToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DiscountedItemCRUD form = new DiscountedItemCRUD();
+            DiscountedItemCRUD form = new DiscountedItemCRUD(authorizedUser as ShopManager);
             form.ShowDialog();
         }
 
         private void çíèæêèToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DiscountCRUD form = new DiscountCRUD();
+            DiscountCRUD form = new DiscountCRUD(authorizedUser as ShopManager);
             form.ShowDialog();
         }
     }
