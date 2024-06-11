@@ -47,8 +47,12 @@
             оновитиToolStripMenuItem = new ToolStripMenuItem();
             SidePanel = new Panel();
             panel1 = new Panel();
+            labelCopied = new Label();
+            textBoxEmail = new TextBox();
+            label1 = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
             menuStrip1.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
@@ -181,11 +185,46 @@
             // panel1
             // 
             panel1.BackColor = Color.LightGray;
+            panel1.Controls.Add(labelCopied);
+            panel1.Controls.Add(textBoxEmail);
+            panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Bottom;
             panel1.Location = new Point(200, 704);
             panel1.Name = "panel1";
             panel1.Size = new Size(1058, 40);
             panel1.TabIndex = 2;
+            // 
+            // labelCopied
+            // 
+            labelCopied.AutoSize = true;
+            labelCopied.ForeColor = Color.ForestGreen;
+            labelCopied.Location = new Point(686, 6);
+            labelCopied.Name = "labelCopied";
+            labelCopied.Size = new Size(271, 25);
+            labelCopied.TabIndex = 2;
+            labelCopied.Text = "Скопійовано до буферу обміну";
+            labelCopied.Visible = false;
+            // 
+            // textBoxEmail
+            // 
+            textBoxEmail.BackColor = Color.AntiqueWhite;
+            textBoxEmail.Location = new Point(478, 6);
+            textBoxEmail.Name = "textBoxEmail";
+            textBoxEmail.ReadOnly = true;
+            textBoxEmail.Size = new Size(202, 31);
+            textBoxEmail.TabIndex = 1;
+            textBoxEmail.Text = "shopregistr@gmail.com";
+            textBoxEmail.Click += textBoxEmail_Click;
+            textBoxEmail.Enter += textBoxEmail_Enter;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(29, 6);
+            label1.Name = "label1";
+            label1.Size = new Size(453, 25);
+            label1.TabIndex = 0;
+            label1.Text = "Хочете побачити тут свої знижки? - Пишіть на пошту: ";
             // 
             // flowLayoutPanel1
             // 
@@ -213,6 +252,8 @@
             Load += Main_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -238,5 +279,8 @@
         private ToolStripMenuItem toolStripMenuItem2;
         private FlowLayoutPanel flowLayoutPanel1;
         private ToolStripMenuItem оновитиToolStripMenuItem;
+        private TextBox textBoxEmail;
+        private Label label1;
+        private Label labelCopied;
     }
 }

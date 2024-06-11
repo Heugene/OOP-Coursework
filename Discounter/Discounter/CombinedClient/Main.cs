@@ -9,6 +9,8 @@ namespace CombinedClient
         static string searchBarPlaceholder = "Пошук...";
         static Person? authorizedUser = null;
 
+        static string registrationEmail = @"shopregistr@gmail.com";
+
         static string jsonPath = Application.StartupPath + @"\discounts.json";
 
         List<Discount> Discounts = new List<Discount>();
@@ -21,7 +23,9 @@ namespace CombinedClient
         void Main_Load(object sender, EventArgs e)
         {
             toolStripTextBoxSearch.Text = searchBarPlaceholder;
+            textBoxEmail.Text = registrationEmail;
             Deauthorize();
+            // DEBUG
             //PopulateItemsTEST();
             LoadDiscounts();
         }
@@ -285,6 +289,22 @@ namespace CombinedClient
             }
         }
 
-        
+        private void textBoxEmail_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(textBoxEmail.Text);
+            ToggleCopiedLabelVisibility();
+        }
+
+        private async void ToggleCopiedLabelVisibility()
+        {
+            labelCopied.Show();
+            await Task.Delay(5000);
+            labelCopied.Hide();
+        }
+
+        private void textBoxEmail_Enter(object sender, EventArgs e)
+        {
+            this.ActiveControl = null;
+        }
     }
 }
