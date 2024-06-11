@@ -58,7 +58,7 @@ namespace DAL
             sqlConnection.Open();
             SqlCommand cmd = sqlConnection.CreateCommand();
             List<DiscountRequest> list = new List<DiscountRequest>();
-            //try
+            try
             {
                 cmd.CommandText = $"SELECT * FROM DiscountRequest INNER JOIN Discount ON DiscountRequest.DiscountID = Discount.Id;";
                 var result = cmd.ExecuteReader();
@@ -82,9 +82,9 @@ namespace DAL
                 }
                 list = list.Where(x => x.ViewedDateTime is null).ToList();
             }
-            //catch
+            catch
             {
-                //list = null;
+                list = null;
             }
             sqlConnection.Close();
             return list;
