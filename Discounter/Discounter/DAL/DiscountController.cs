@@ -58,23 +58,33 @@ namespace DAL
             sqlConnection.Open();
             SqlCommand cmd = sqlConnection.CreateCommand();
             List<DiscountRequest> list = new List<DiscountRequest>();
-            try
+            //try
             {
-                cmd.CommandText = $"SELECT * FROM DiscountRequest INNER JOIN Discount WHERE ViewedDateTime = NULL;";
+                cmd.CommandText = $"SELECT * FROM DiscountRequest INNER JOIN Discount ON DiscountRequest.DiscountID = Discount.Id;";
                 var result = cmd.ExecuteReader();
 
                 Discount discount;
                 ShopManager manager;
+                DateTime reviewed;
                 while (result.Read())
                 {
                     discount = DAL.DiscountController.GetDiscount(int.Parse(result["DiscountID"].ToString()));
                     manager = DAL.ManagerController.GetShopManager(int.Parse(result["ManagerID"].ToString()));
-                    list.Add(new DiscountRequest(int.Parse(result["Id"].ToString()), DateTime.Parse(result["CreatedDateTime"].ToString()), manager, discount));
+                    if (DateTime.TryParse(result["ViewedDateTime"].ToString(), out reviewed))
+                    {
+                        list.Add(new DiscountRequest(int.Parse(result["Id"].ToString()), DateTime.Parse(result["CreatedDateTime"].ToString()), manager, discount, reviewed));
+                    }
+                    else
+                    {
+                        list.Add(new DiscountRequest(int.Parse(result["Id"].ToString()), DateTime.Parse(result["CreatedDateTime"].ToString()), manager, discount, null));
+                    }
+                    
                 }
+                list = list.Where(x => x.ViewedDateTime is null).ToList();
             }
-            catch
+            //catch
             {
-                list = null;
+                //list = null;
             }
             sqlConnection.Close();
             return list;
