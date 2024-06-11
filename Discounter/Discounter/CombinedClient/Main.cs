@@ -11,6 +11,8 @@ namespace CombinedClient
 
         static string jsonPath = Application.StartupPath + @"\discounts.json";
 
+        List<Discount> Discounts = new List<Discount>();
+
         public Main()
         {
             InitializeComponent();
@@ -120,8 +122,8 @@ namespace CombinedClient
             {
                 //throw new Exception("Deserialization Test");
 
-                List<Discount> discounts = DAL.DiscountController.GetAllActualDiscounts();
-                DiscountListItem[] itemList = new DiscountListItem[discounts.Count];
+                Discounts = DAL.DiscountController.GetAllActualDiscounts();
+                DiscountListItem[] itemList = new DiscountListItem[Discounts.Count];
 
                 if (flowLayoutPanel1.Controls.Count > 0)
                 {
@@ -131,12 +133,12 @@ namespace CombinedClient
                 for (int i = 0; i < itemList.Length; i++)
                 {
                     itemList[i] = new DiscountListItem();
-                    itemList[i].Discount = discounts[i];
+                    itemList[i].Discount = Discounts[i];
                     flowLayoutPanel1.Controls.Add(itemList[i]);
                 }
 
 
-                SerializeDiscounts(discounts, jsonPath);
+                SerializeDiscounts(Discounts, jsonPath);
             }
             catch
             {
@@ -185,13 +187,13 @@ namespace CombinedClient
             {
                 MessageBox.Show($"Щось пішло не так при завантаженні збережених знижок. \nПомилка: {ex.Message}", "Помилка зчитування збережених знижок!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            return discounts;
+            return Discounts;
         }
 
         private void LoadDiscountsFromFile()
         {
-            List<Discount> discounts = DeserializeDiscounts(jsonPath);
-            DiscountListItem[] itemList = new DiscountListItem[discounts.Count];
+            Discounts = DeserializeDiscounts(jsonPath);
+            DiscountListItem[] itemList = new DiscountListItem[Discounts.Count];
 
             if (flowLayoutPanel1.Controls.Count > 0)
             {
@@ -201,7 +203,7 @@ namespace CombinedClient
             for (int i = 0; i < itemList.Length; i++)
             {
                 itemList[i] = new DiscountListItem();
-                itemList[i].Discount = discounts[i];
+                itemList[i].Discount = Discounts[i];
                 flowLayoutPanel1.Controls.Add(itemList[i]);
             }
         }
@@ -246,5 +248,43 @@ namespace CombinedClient
         {
             LoadDiscounts();
         }
+
+        private void знайтиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (toolStripTextBoxSearch.Text != "" && !string.Equals(toolStripTextBoxSearch.Text, searchBarPlaceholder))
+            {
+                List<Discount> result = new List<Discount>();
+                List<Discount> searchByTrademarkName = DAL.DiscountController.SearchByTrademarkName(Discounts, toolStripTextBoxSearch.Text);
+                List<Discount> searchByItemName = DAL.DiscountController.SearchByItemName(Discounts, toolStripTextBoxSearch.Text);
+                List<Discount> searchByDiscountName = DAL.DiscountController.SearchByDiscountName(Discounts, toolStripTextBoxSearch.Text);
+
+                // DEBUG
+                //MessageBox.Show($"searchByTrademarkName: {searchByTrademarkName.Count}");
+                //MessageBox.Show($"searchByItemName: {searchByItemName.Count}");
+                //MessageBox.Show($"searchByDiscountName: {searchByDiscountName.Count}");
+
+                result = searchByDiscountName.Union(searchByItemName.Union(searchByTrademarkName)).ToList();
+
+                DiscountListItem[] itemList = new DiscountListItem[result.Count];
+
+                if (flowLayoutPanel1.Controls.Count > 0)
+                {
+                    flowLayoutPanel1.Controls.Clear();
+                }
+
+                for (int i = 0; i < itemList.Length; i++)
+                {
+                    itemList[i] = new DiscountListItem();
+                    itemList[i].Discount = result[i];
+                    flowLayoutPanel1.Controls.Add(itemList[i]);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Не можна здійснити пошук, не вказавши запиту...", "Попередження!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
+        
     }
 }

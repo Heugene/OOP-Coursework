@@ -44,10 +44,10 @@
             товариToolStripMenuItem = new ToolStripMenuItem();
             знижкиToolStripMenuItem = new ToolStripMenuItem();
             toolStripMenuItem2 = new ToolStripMenuItem();
+            оновитиToolStripMenuItem = new ToolStripMenuItem();
             SidePanel = new Panel();
             panel1 = new Panel();
             flowLayoutPanel1 = new FlowLayoutPanel();
-            оновитиToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -69,6 +69,7 @@
             знайтиToolStripMenuItem.Name = "знайтиToolStripMenuItem";
             знайтиToolStripMenuItem.Size = new Size(84, 31);
             знайтиToolStripMenuItem.Text = "Знайти";
+            знайтиToolStripMenuItem.Click += знайтиToolStripMenuItem_Click;
             // 
             // toolStripTextBoxSearch
             // 
@@ -160,6 +161,14 @@
             toolStripMenuItem2.Name = "toolStripMenuItem2";
             toolStripMenuItem2.Size = new Size(16, 31);
             // 
+            // оновитиToolStripMenuItem
+            // 
+            оновитиToolStripMenuItem.Image = (Image)resources.GetObject("оновитиToolStripMenuItem.Image");
+            оновитиToolStripMenuItem.Name = "оновитиToolStripMenuItem";
+            оновитиToolStripMenuItem.Size = new Size(124, 31);
+            оновитиToolStripMenuItem.Text = "Оновити";
+            оновитиToolStripMenuItem.Click += оновитиToolStripMenuItem_Click;
+            // 
             // SidePanel
             // 
             SidePanel.BackColor = Color.PeachPuff;
@@ -186,14 +195,6 @@
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(1058, 669);
             flowLayoutPanel1.TabIndex = 3;
-            // 
-            // оновитиToolStripMenuItem
-            // 
-            оновитиToolStripMenuItem.Image = (Image)resources.GetObject("оновитиToolStripMenuItem.Image");
-            оновитиToolStripMenuItem.Name = "оновитиToolStripMenuItem";
-            оновитиToolStripMenuItem.Size = new Size(124, 31);
-            оновитиToolStripMenuItem.Text = "Оновити";
-            оновитиToolStripMenuItem.Click += оновитиToolStripMenuItem_Click;
             // 
             // Main
             // 
