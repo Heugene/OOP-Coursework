@@ -175,7 +175,8 @@ namespace DAL
             {
                 cmd.CommandText = $"UPDATE Discount SET IsApproved = 1 WHERE Id = {discountRequest.RequestedDiscount.ID};";
                 cmd.ExecuteNonQuery();
-                cmd.CommandText = $"UPDATE DiscountRequest SET ViewedDateTime = '{DateTime.Now}'";
+                cmd.CommandText = $"UPDATE DiscountRequest SET ViewedDateTime = '{DateTime.Now}' WHERE Id = {discountRequest.RequestedDiscount.ID};";
+                cmd.ExecuteNonQuery();
                 sqlConnection.Close();
                 discountRequest.RequestedDiscount.Approve();
                 return true;
@@ -195,7 +196,8 @@ namespace DAL
             {
                 cmd.CommandText = $"UPDATE Discount SET WasRejected = 1 WHERE Id = {discountRequest.RequestedDiscount.ID};";
                 cmd.ExecuteNonQuery();
-                cmd.CommandText = $"UPDATE DiscountRequest SET ViewedDateTime = '{DateTime.Now}'";
+                cmd.CommandText = $"UPDATE DiscountRequest SET ViewedDateTime = '{DateTime.Now}' Id = {discountRequest.RequestedDiscount.ID};";
+                cmd.ExecuteNonQuery();
                 sqlConnection.Close();
                 discountRequest.RequestedDiscount.Reject();
                 return true;
