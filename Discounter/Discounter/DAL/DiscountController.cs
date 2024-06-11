@@ -207,5 +207,20 @@ namespace DAL
                 return false;
             }
         }
+
+        public static List<Discount> SearchByTrademarkName(List<Discount> discounts, string searchString)
+        {
+            return discounts.Where(x => x.Item.Shop.Trademark.Name.ToLower().Contains(searchString.ToLower())).ToList();
+        }
+
+        public static List<Discount> SearchByItemName(List<Discount> discounts, string searchString)
+        {
+            return discounts.Where(x => x.Item.Name.ToLower().Contains(searchString.ToLower())).ToList();
+        }
+
+        public static List<Discount> SearchByDiscountName(List<Discount> discounts, string searchString)
+        {
+            return discounts.Where(x => x.Name.ToLower().Contains(searchString.ToLower())).ToList();
+        }
     }
 }
