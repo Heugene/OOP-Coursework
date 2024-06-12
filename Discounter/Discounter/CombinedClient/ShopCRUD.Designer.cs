@@ -72,7 +72,7 @@
             toolStripButtonRefresh.Name = "toolStripButtonRefresh";
             toolStripButtonRefresh.Size = new Size(112, 29);
             toolStripButtonRefresh.Text = "Оновити";
-            toolStripButtonRefresh.DoubleClick += toolStripButtonRefresh_Click;
+            toolStripButtonRefresh.Click += toolStripButtonRefresh_Click;
             // 
             // toolStripButtonNew
             // 
