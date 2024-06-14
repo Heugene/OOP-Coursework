@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -120,7 +121,7 @@ namespace DAL
             List<Discount> list = new List<Discount>();
             try
             {
-                cmd.CommandText = $"SELECT * FROM Discount WHERE WasRejected = 0 AND IsApproved = 1 AND EndDateTime <= '{DateTime.Now}';";
+                cmd.CommandText = $"SELECT * FROM Discount WHERE WasRejected = 0 AND IsApproved = 1 AND EndDateTime >= N'{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}';";
                 var result = cmd.ExecuteReader();
                 DiscountedItem item;
                 while (result.Read())
