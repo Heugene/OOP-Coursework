@@ -68,32 +68,64 @@ namespace CombinedClient
 
         private void toolStripButtonNew_Click(object sender, EventArgs e)
         {
-            // Викликати форму створення нового об'єкта та повернути створений об'єкт сюди
-
-            // Викликати метод додавання об'єкта з контролеру і передати туди новий об'єкт.
-
-            // Якщо гуд, повідомлення
-
-            // У випадку помилки - повідомлення
-
-            // Оновити дані датагріду
-            Refresh();
+            // Викликати форму створення нового об'єкта
+            NewShopManager form = new NewShopManager();
+            form.ShowDialog();
+            if (form.IsFilled)
+            {
+                try
+                {
+                    // Викликати метод додавання об'єкта з контролеру.
+                    if (DAL.ManagerController.CreateShopManager(form.Name, form.Phone, form.Email, form.Password, form.ManagedShop) is not null)
+                    {
+                        // Якщо гуд, повідомлення
+                        MessageBox.Show("Об'єкт успішно створений!", "Успіх!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        // Оновити дані датагріду
+                        Refresh();
+                    }
+                    else
+                    {
+                        // якщо чомусь не додали
+                        MessageBox.Show($"Помилка додавання об'єкта!", "Помилка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Якщо помилка валідації
+                    MessageBox.Show($"Помилка додавання об'єкта!\nКод помилки: {ex.Message}", "Помилка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
-            // Викликати форму редагування об'єкта та передати обраний об'єкт туди
-
-            // Дістати з форми редагування значення полів введення даних
-
-            // Викликати метод зміни об'єкта з контролеру і передати туди обраний об'єкт та отримані значення з форми редагування.
-
-            // Якщо гуд, повідомлення
-
-            // У випадку помилки - повідомлення
-
-            // Оновити дані датагріду
-            Refresh();
+            // Викликати форму для редагування об'єкта
+            EditShopManager form = new EditShopManager((ShopManager)selectedRow.DataBoundItem);
+            form.ShowDialog();
+            if (form.IsFilled)
+            {
+                try
+                {
+                    // Викликати метод оновлення об'єкта з контролеру.
+                    if (DAL.ManagerController.UpdateShopManager((ShopManager)selectedRow.DataBoundItem, form.Name, form.Phone, form.Email, form.Password))
+                    {
+                        // Якщо гуд, повідомлення
+                        MessageBox.Show("Об'єкт успішно оновлений!", "Успіх!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        // Оновити дані датагріду
+                        Refresh();
+                    }
+                    else
+                    {
+                        // якщо чомусь не оновили
+                        MessageBox.Show($"Помилка оновлення об'єкта!", "Помилка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Якщо помилка валідації
+                    MessageBox.Show($"Помилка оновлення об'єкта!\nКод помилки: {ex.Message}", "Помилка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void toolStripButtonDelete_Click(object sender, EventArgs e)
