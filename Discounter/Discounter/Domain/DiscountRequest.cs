@@ -10,7 +10,7 @@ namespace Domain
     public class DiscountRequest : IValidable
     {
         public int ID { get; set; }
-        public DateTime? CreatedDateTime { get; set; }
+        public DateTime CreatedDateTime { get; set; }
         public ShopManager Manager { get; set; }
         public Discount RequestedDiscount { get; set; }
         public DateTime? ViewedDateTime { get; set; }
@@ -45,10 +45,6 @@ namespace Domain
         /// <exception cref="ArgumentException"></exception>
         public bool IsValid()
         {
-            if (CreatedDateTime is null)
-            {
-                throw new ArgumentException("Created datatime can`t be null");
-            }
             if (Manager is null)
             {
                 throw new ArgumentException("Shop manager can`t be null");
