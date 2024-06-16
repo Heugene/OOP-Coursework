@@ -111,7 +111,7 @@
             buttonConfirm.Name = "buttonConfirm";
             buttonConfirm.Size = new Size(112, 34);
             buttonConfirm.TabIndex = 19;
-            buttonConfirm.Text = "Оновити";
+            buttonConfirm.Text = "Зберегти";
             buttonConfirm.UseVisualStyleBackColor = true;
             buttonConfirm.Click += buttonConfirm_Click;
             // 
