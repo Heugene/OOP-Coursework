@@ -24,11 +24,12 @@ namespace DAL
                 SqlCommand cmd = sqlConnection.CreateCommand();
                 try
                 {
-                    cmd.CommandText = $"SELECT MAX(Id) FROM DiscountedItem + 1;";
-                    int newItemId = (int)cmd.ExecuteScalar();
 
-                    cmd.CommandText = $"INSERT INTO DiscountedItem VALUES ('{newItemId}', '{name}', '{description}', '{type.ToString()}', {shop.ID});";
+                    cmd.CommandText = $"INSERT INTO DiscountedItem VALUES ('{name}', '{description}', '{type.ToString()}', {shop.ID});";
                     cmd.ExecuteNonQuery();
+
+                    cmd.CommandText = $"SELECT SCOPE_IDENTITY() FROM DiscountedItem;";
+                    int newItemId = Convert.ToInt32(cmd.ExecuteScalar());
 
                     cmd.CommandText = $"INSERT INTO ItemPicture VALUES ({newItemId}, @photo);";
 
@@ -63,15 +64,14 @@ namespace DAL
                 result.Read();
                 Shop shop = DAL.ShopController.GetShop(int.Parse(result["ShopID"].ToString()));
                 item = new DiscountedItem(int.Parse(result["Id"].ToString()), result["Name"].ToString(), Enum.Parse<ItemType>(result["Type"].ToString()), result["Description"].ToString(), shop);
+                result.Close();
 
-                // ТИМЧАСОВО ВІДКЛЮЧИВ ЗАВАНТАЖЕННЯ КАРТИНКИ. ВИДАЄ ЕКСЕПШЕН, ПОТІМ РОЗБЕРУСЬ.
-
-                //cmd.CommandText = $"SELECT Picture FROM ItemPicture WHERE ItemID = {item.ID}";
-                //var imageReader = cmd.ExecuteReader();
-                //imageReader.Read();
-                //byte[] imageByteArray = (byte[])(imageReader["Picture"]);
-                //MemoryStream ms = new MemoryStream(imageByteArray);
-                //item.SetPicture(new Bitmap(Image.FromStream(ms)));
+                cmd.CommandText = $"SELECT Picture FROM ItemPicture WHERE ItemID = {item.ID}";
+                var imageReader = cmd.ExecuteReader();
+                imageReader.Read();
+                byte[] imageByteArray = (byte[])(imageReader["Picture"]);
+                MemoryStream ms = new MemoryStream(imageByteArray);
+                item.SetPicture(new Bitmap(Image.FromStream(ms)));
             }
             catch
             {
@@ -96,16 +96,17 @@ namespace DAL
                     Shop shop = DAL.ShopController.GetShop(int.Parse(result["ShopID"].ToString()));
                     list.Add(new DiscountedItem(int.Parse(result["Id"].ToString()), result["Name"].ToString(), Enum.Parse<ItemType>(result["Type"].ToString()), result["Description"].ToString(), shop));
                 }
+                result.Close();
 
-                //foreach (var item in list)
-                //{
-                //    cmd.CommandText = $"SELECT Picture FROM ItemPicture WHERE ItemID = {item.ID}";
-                //    var imageReader = cmd.ExecuteReader();
-                //    imageReader.Read();
-                //    byte[] imageByteArray = (byte[])(imageReader["Picture"]);
-                //    MemoryStream ms = new MemoryStream(imageByteArray);
-                //    item.SetPicture(new Bitmap(Image.FromStream(ms)));
-                //}
+                foreach (var item in list)
+                {
+                    cmd.CommandText = $"SELECT Picture FROM ItemPicture WHERE ItemID = {item.ID}";
+                    var imageReader = cmd.ExecuteReader();
+                    imageReader.Read();
+                    byte[] imageByteArray = (byte[])(imageReader["Picture"]);
+                    MemoryStream ms = new MemoryStream(imageByteArray);
+                    item.SetPicture(new Bitmap(Image.FromStream(ms)));
+                }
             }
             catch
             {
@@ -132,15 +133,16 @@ namespace DAL
                 }
                 result.Close();
 
-                //foreach (var item in list)
-                //{
-                //    cmd.CommandText = $"SELECT Picture FROM ItemPicture WHERE ItemID = {item.ID}";
-                //    var imageReader = cmd.ExecuteReader();
-                //    imageReader.Read();
-                //    byte[] imageByteArray = (byte[])(imageReader["Picture"]);
-                //    MemoryStream ms = new MemoryStream(imageByteArray);
-                //    item.SetPicture(new Bitmap(Image.FromStream(ms)));
-                //}
+                foreach (var item in list)
+                {
+                    cmd.CommandText = $"SELECT Picture FROM ItemPicture WHERE ItemID = {item.ID}";
+                    var imageReader = cmd.ExecuteReader();
+                    imageReader.Read();
+                    byte[] imageByteArray = (byte[])(imageReader["Picture"]);
+                    MemoryStream ms = new MemoryStream(imageByteArray);
+                    item.SetPicture(new Bitmap(Image.FromStream(ms)));
+                    imageReader.Close();
+                }
             }
             catch
             {
@@ -163,7 +165,7 @@ namespace DAL
                 SqlCommand cmd = sqlConnection.CreateCommand();
                 try
                 {
-                    cmd.CommandText = $"UPDATE DiscountedItem SET Name = '{name}', Description = '{description}', WHERE Id = {item.ID};";
+                    cmd.CommandText = $"UPDATE DiscountedItem SET Name = '{name}', Description = '{description}' WHERE Id = {item.ID};";
                     cmd.ExecuteNonQuery();
                     cmd.CommandText = $"UPDATE ItemPicture SET Picture = @photo WHERE ItemID = {item.ID};";
 
