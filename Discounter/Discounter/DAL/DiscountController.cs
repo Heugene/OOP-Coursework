@@ -33,13 +33,13 @@ namespace DAL
                 SqlCommand cmd = sqlConnection.CreateCommand();
                 try
                 {
-                    cmd.CommandText = $"SELECT MAX(Id) FROM Discount + 1;";
-                    int newDiscountId = (int)cmd.ExecuteScalar();
-
-                    cmd.CommandText = $"INSERT INTO Discount VALUES ({newDiscountId}, '{name}', '{description}', {item.ID}, {oldPrice}, {newPrice}, '{startDateTime}', '{endDateTime}', 0, 0);";
+                    cmd.CommandText = $"INSERT INTO Discount VALUES ('{name}', '{description}', {item.ID}, CAST({oldPrice.ToString(CultureInfo.InvariantCulture)} AS Money), CAST({newPrice.ToString(CultureInfo.InvariantCulture)} AS Money), N'{startDateTime.ToString("yyyy-MM-dd HH:mm:ss")}', '{endDateTime.ToString("yyyy-MM-dd HH:mm:ss")}', 0, 0);";
                     cmd.ExecuteNonQuery();
 
-                    cmd.CommandText = $"INSERT INTO DiscountRequest VALUES ({manager.ID}, {discount.ID}, {request.CreatedDateTime}, NULL);";
+                    cmd.CommandText = $"SELECT SCOPE_IDENTITY() FROM Discount;";
+                    int newDiscountId = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    cmd.CommandText = $"INSERT INTO DiscountRequest VALUES ({manager.ID}, {newDiscountId}, N'{request.CreatedDateTime.ToString("yyyy-MM-dd HH:mm:ss")}', NULL);";
                     cmd.ExecuteNonQuery();
                 }
                 catch
@@ -176,7 +176,7 @@ namespace DAL
             {
                 cmd.CommandText = $"UPDATE Discount SET IsApproved = 1 WHERE Id = {discountRequest.RequestedDiscount.ID};";
                 cmd.ExecuteNonQuery();
-                cmd.CommandText = $"UPDATE DiscountRequest SET ViewedDateTime = '{DateTime.Now}' WHERE Id = {discountRequest.RequestedDiscount.ID};";
+                cmd.CommandText = $"UPDATE DiscountRequest SET ViewedDateTime = N'{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}' WHERE Id = {discountRequest.ID};";
                 cmd.ExecuteNonQuery();
                 sqlConnection.Close();
                 discountRequest.RequestedDiscount.Approve();
@@ -197,7 +197,7 @@ namespace DAL
             {
                 cmd.CommandText = $"UPDATE Discount SET WasRejected = 1 WHERE Id = {discountRequest.RequestedDiscount.ID};";
                 cmd.ExecuteNonQuery();
-                cmd.CommandText = $"UPDATE DiscountRequest SET ViewedDateTime = '{DateTime.Now}' WHERE Id = {discountRequest.RequestedDiscount.ID};";
+                cmd.CommandText = $"UPDATE DiscountRequest SET ViewedDateTime = N'{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}' WHERE Id = {discountRequest.ID};";
                 cmd.ExecuteNonQuery();
                 sqlConnection.Close();
                 discountRequest.RequestedDiscount.Reject();
