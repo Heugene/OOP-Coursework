@@ -43,6 +43,7 @@
             pictureBox.Location = new Point(3, 3);
             pictureBox.Name = "pictureBox";
             pictureBox.Size = new Size(150, 150);
+            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox.TabIndex = 0;
             pictureBox.TabStop = false;
             // 
