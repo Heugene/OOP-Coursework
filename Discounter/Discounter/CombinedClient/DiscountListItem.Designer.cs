@@ -46,6 +46,9 @@
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox.TabIndex = 0;
             pictureBox.TabStop = false;
+            pictureBox.Click += pictureBox_Click;
+            pictureBox.MouseEnter += pictureBox_MouseEnter;
+            pictureBox.MouseLeave += pictureBox_MouseLeave;
             // 
             // labelDiscName
             // 
@@ -115,7 +118,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Linen;
+            BackColor = Color.Bisque;
             Controls.Add(labelTrademark);
             Controls.Add(labelNewPrice);
             Controls.Add(labelOldPrice);

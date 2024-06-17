@@ -202,5 +202,15 @@ namespace CombinedClient
                 Refresh();
             }
         }
+
+        private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (selectedRow is not null)
+            {
+                // Відкрити форму для перегляду повної інформації про знижку
+                DiscountReview form = new DiscountReview(((DiscountRequest)selectedRow.DataBoundItem).RequestedDiscount);
+                form.ShowDialog();
+            }
+        }
     }
 }

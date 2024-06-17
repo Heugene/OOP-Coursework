@@ -40,17 +40,36 @@ namespace CombinedClient
 
         private void DiscountListItem_MouseEnter(object sender, EventArgs e)
         {
-            //this.BackColor = Color.Linen;
+            this.BackColor = Color.Linen;
         }
 
         private void DiscountListItem_MouseLeave(object sender, EventArgs e)
         {
-            //this.BackColor = Color.Bisque;
+            this.BackColor = Color.Bisque;
         }
 
         private void DiscountListItem_Click(object sender, EventArgs e)
         {
             // Відкрити форму для перегляду повної інформації про знижку
+            DiscountReview form = new DiscountReview(discount);
+            form.ShowDialog();
+        }
+
+        private void pictureBox_Click(object sender, EventArgs e)
+        {
+            // Відкрити форму для перегляду повної інформації про знижку
+            DiscountReview form = new DiscountReview(discount);
+            form.ShowDialog();
+        }
+
+        private void pictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            this.BackColor = Color.Linen;
+        }
+
+        private void pictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            this.BackColor = Color.Bisque;
         }
     }
 }

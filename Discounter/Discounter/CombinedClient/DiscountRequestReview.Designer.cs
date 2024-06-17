@@ -54,6 +54,7 @@
             dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView.Size = new Size(778, 510);
             dataGridView.TabIndex = 5;
+            dataGridView.CellDoubleClick += dataGridView_CellDoubleClick;
             dataGridView.SelectionChanged += dataGridView_SelectionChanged;
             // 
             // toolStrip
