@@ -46,12 +46,15 @@
             toolStripMenuItem2 = new ToolStripMenuItem();
             оновитиToolStripMenuItem = new ToolStripMenuItem();
             SidePanel = new Panel();
+            comboBoxFilter = new ComboBox();
+            label2 = new Label();
             panel1 = new Panel();
             labelCopied = new Label();
             textBoxEmail = new TextBox();
             label1 = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
             menuStrip1.SuspendLayout();
+            SidePanel.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -176,11 +179,32 @@
             // SidePanel
             // 
             SidePanel.BackColor = Color.PeachPuff;
+            SidePanel.Controls.Add(comboBoxFilter);
+            SidePanel.Controls.Add(label2);
             SidePanel.Dock = DockStyle.Left;
             SidePanel.Location = new Point(0, 35);
             SidePanel.Name = "SidePanel";
             SidePanel.Size = new Size(200, 709);
             SidePanel.TabIndex = 1;
+            // 
+            // comboBoxFilter
+            // 
+            comboBoxFilter.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxFilter.FormattingEnabled = true;
+            comboBoxFilter.Location = new Point(12, 291);
+            comboBoxFilter.Name = "comboBoxFilter";
+            comboBoxFilter.Size = new Size(182, 33);
+            comboBoxFilter.TabIndex = 1;
+            comboBoxFilter.SelectedIndexChanged += comboBoxFilter_SelectedIndexChanged;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(22, 263);
+            label2.Name = "label2";
+            label2.Size = new Size(162, 25);
+            label2.TabIndex = 0;
+            label2.Text = "Фільтрувати за ТМ";
             // 
             // panel1
             // 
@@ -252,6 +276,8 @@
             Load += Main_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            SidePanel.ResumeLayout(false);
+            SidePanel.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
@@ -282,5 +308,7 @@
         private TextBox textBoxEmail;
         private Label label1;
         private Label labelCopied;
+        private ComboBox comboBoxFilter;
+        private Label label2;
     }
 }

@@ -141,7 +141,7 @@ namespace CombinedClient
                     flowLayoutPanel1.Controls.Add(itemList[i]);
                 }
 
-
+                FillFilter();
                 SerializeDiscounts(Discounts, jsonPath);
             }
             catch
@@ -305,6 +305,39 @@ namespace CombinedClient
         private void textBoxEmail_Enter(object sender, EventArgs e)
         {
             this.ActiveControl = null;
+        }
+
+        private void FillFilter()
+        {
+            List<Trademark> trademarks = [new Trademark("- Âñ³ -", "")];
+            trademarks.AddRange(Discounts.Select(x => x.Item.Shop.Trademark).GroupBy(g => g.Name).Select(y => y.First()).ToList());
+            comboBoxFilter.DisplayMember = "Name";
+            comboBoxFilter.DataSource = trademarks;
+        }
+
+        private void comboBoxFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (((Trademark)comboBoxFilter.SelectedItem).Name == "- Âñ³ -")
+            {
+                LoadDiscounts();
+            }
+            else
+            {
+                List<Discount> result = DAL.DiscountController.GetAllActualDiscountsByTrademark((Trademark)comboBoxFilter.SelectedItem);
+                DiscountListItem[] itemList = new DiscountListItem[result.Count];
+
+                if (flowLayoutPanel1.Controls.Count > 0)
+                {
+                    flowLayoutPanel1.Controls.Clear();
+                }
+
+                for (int i = 0; i < itemList.Length; i++)
+                {
+                    itemList[i] = new DiscountListItem();
+                    itemList[i].Discount = result[i];
+                    flowLayoutPanel1.Controls.Add(itemList[i]);
+                }
+            }
         }
     }
 }
