@@ -9,87 +9,89 @@ using System.Xml.Linq;
 
 namespace DAL
 {
-    public class TrademarkController
+    public class ShopController
     {
-        public static Trademark CreateTrademark(string name, string description)
+        public static Shop CreateShop(Trademark trademark, string address)
         {
-            Trademark trademark = new Trademark(name, description);
-
-            if (trademark.IsValid())
+            Shop shop = new Shop(trademark, address);
+            if (shop.IsValid())
             {
                 SqlConnection sqlConnection = new SqlConnection(Common.ConnectionString);
                 sqlConnection.Open();
                 SqlCommand cmd = sqlConnection.CreateCommand();
                 try
                 {
-                    cmd.CommandText = $"INSERT INTO Trademark VALUES ('{name}', '{description}');";
+                    cmd.CommandText = $"INSERT INTO Shop VALUES ('{address}', {trademark.ID});";
                     cmd.ExecuteNonQuery();
                 }
                 catch
                 {
-                    trademark = null;
+                    shop = null;
                 }
                 sqlConnection.Close();
             }
-            return trademark;
+            return shop;
         }
 
-
-        public static Trademark GetTrademark(int id)
+        public static Shop GetShop(int id)
         {
             SqlConnection sqlConnection = new SqlConnection(Common.ConnectionString);
             sqlConnection.Open();
             SqlCommand cmd = sqlConnection.CreateCommand();
-            Trademark trademark;
+            Shop shop;
             try
             {
-                cmd.CommandText = $"SELECT * FROM Trademark WHERE Id = {id};";
+                cmd.CommandText = $"SELECT * FROM Shop WHERE Id = {id};";
                 var result = cmd.ExecuteReader();
                 result.Read();
-                trademark = new Trademark(int.Parse(result["Id"].ToString()), result["Name"].ToString(), result["Description"].ToString());
+                Trademark trademark = DAL.TrademarkController.GetTrademark(int.Parse(result["TrademarkID"].ToString()));
+                shop = new Shop(int.Parse(result["Id"].ToString()), trademark, result["Address"].ToString());
             }
             catch
             {
-                trademark = null;
+                shop = null;
             }
             sqlConnection.Close();
-            return trademark;
+            return shop;
         }
 
-        public static Trademark GetTrademark(string name)
+        public static Shop GetShop(string address)
         {
             SqlConnection sqlConnection = new SqlConnection(Common.ConnectionString);
             sqlConnection.Open();
             SqlCommand cmd = sqlConnection.CreateCommand();
-            Trademark trademark;
+            Shop shop;
             try
             {
-                cmd.CommandText = $"SELECT * FROM Trademark WHERE Name = {name};";
+                cmd.CommandText = $"SELECT * FROM Shop WHERE Address = {address};";
                 var result = cmd.ExecuteReader();
                 result.Read();
-                trademark = new Trademark(int.Parse(result["Id"].ToString()), result["Name"].ToString(), result["Description"].ToString());
+                Trademark trademark = DAL.TrademarkController.GetTrademark(int.Parse(result["TrademarkID"].ToString()));
+                shop = new Shop(int.Parse(result["Id"].ToString()), trademark, result["Address"].ToString());
             }
             catch
             {
-                trademark = null;
+                shop = null;
             }
             sqlConnection.Close();
-            return trademark;
+            return shop;
         }
 
-        public static List<Trademark> GetTrademarks() 
+        public static List<Shop> GetAllShops()
         {
             SqlConnection sqlConnection = new SqlConnection(Common.ConnectionString);
             sqlConnection.Open();
             SqlCommand cmd = sqlConnection.CreateCommand();
-            List<Trademark> list = new List<Trademark>();
+            List<Shop> list = new List<Shop>();
             try
             {
-                cmd.CommandText = $"SELECT * FROM Trademark;";
+                cmd.CommandText = $"SELECT * FROM Shop;";
                 var result = cmd.ExecuteReader();
-                while(result.Read()) 
+                Trademark trademark;
+                while (result.Read())
                 {
-                    list.Add(new Trademark(int.Parse(result["Id"].ToString()), result["Name"].ToString(), result["Description"].ToString()));
+                    trademark = DAL.TrademarkController.GetTrademark(int.Parse(result["TrademarkID"].ToString()));
+                    list.Add(new Shop(int.Parse(result["Id"].ToString()), trademark, result["Address"].ToString()));
                 }
             }
             catch
@@ -100,19 +102,41 @@ namespace DAL
             return list;
         }
 
-        public static bool UpdateTrademark(Trademark trademark, string name, string description)
+        public static List<Shop> GetAllShopsByTrademark(Trademark trademark)
         {
-            trademark.Name = name;
-            trademark.Description = description;
+            SqlConnection sqlConnection = new SqlConnection(Common.ConnectionString);
+            sqlConnection.Open();
+            SqlCommand cmd = sqlConnection.CreateCommand();
+            List<Shop> list = new List<Shop>();
+            try
+            {
+                cmd.CommandText = $"SELECT * FROM Shop WHERE TrademarkID = {trademark.ID};";
+                var result = cmd.ExecuteReader();
+                while (result.Read())
+                {
+                    list.Add(new Shop(int.Parse(result["Id"].ToString()), trademark, result["Address"].ToString()));
+                }
+            }
+            catch
+            {
+                list = null;
+            }
+            sqlConnection.Close();
+            return list;
+        }
 
-            if (trademark.IsValid())
+        public static bool UpdateShop(Shop shop, string address)
+        {
+            shop.Address = address;
+
+            if (shop.IsValid())
             {
                 SqlConnection sqlConnection = new SqlConnection(Common.ConnectionString);
                 sqlConnection.Open();
                 SqlCommand cmd = sqlConnection.CreateCommand();
                 try
                 {
-                    cmd.CommandText = $"UPDATE Trademark SET Name = '{name}', Description = '{description}' WHERE Id = {trademark.ID};";
+                    cmd.CommandText = $"UPDATE Shop SET Address = '{address}' WHERE Id = {shop.ID};";
                     cmd.ExecuteNonQuery();
                     sqlConnection.Close();
                     return true;
@@ -125,14 +149,14 @@ namespace DAL
             return false;
         }
 
-        public static bool DeleteTrademark(Trademark trademark) 
+        public static bool DeleteShop(Shop shop)
         {
             SqlConnection sqlConnection = new SqlConnection(Common.ConnectionString);
             sqlConnection.Open();
             SqlCommand cmd = sqlConnection.CreateCommand();
             try
             {
-                cmd.CommandText = $"DELETE FROM Trademark WHERE Id = {trademark.ID};";
+                cmd.CommandText = $"DELETE FROM Shop WHERE Id = {shop.ID};";
                 cmd.ExecuteNonQuery();
                 sqlConnection.Close();
                 return true;
@@ -144,3 +168,4 @@ namespace DAL
         }
     }
 }
+

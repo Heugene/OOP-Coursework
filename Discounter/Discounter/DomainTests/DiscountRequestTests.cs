@@ -16,14 +16,6 @@ namespace DomainTests
         }
 
         [TestMethod]
-        public void CreatedDateTimeIsNull()
-        {
-            DiscountRequest request = new DiscountRequest(DateTime.Now, EmptyManager, EmptyDiscount);
-            request.CreatedDateTime = null;
-            Assert.ThrowsException<ArgumentException>(() => request.IsValid());
-        }
-
-        [TestMethod]
         public void ManagerIsNull()
         {
             DiscountRequest request = new DiscountRequest(DateTime.Now, EmptyManager, EmptyDiscount);

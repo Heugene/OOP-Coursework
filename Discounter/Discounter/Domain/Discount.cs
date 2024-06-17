@@ -58,8 +58,10 @@ namespace Domain
             Item = item;
         }
 
-        public Discount(int id, string name, DiscountedItem item, string description, decimal oldPrice, decimal newPrice, DateTime startDateTime, DateTime endDateTime) : this(name, item, description, oldPrice, newPrice, startDateTime, endDateTime)
+        public Discount(int id, string name, DiscountedItem item, string description, decimal oldPrice, decimal newPrice, DateTime startDateTime, DateTime endDateTime, bool isApproved, bool wasRejected) : this(name, item, description, oldPrice, newPrice, startDateTime, endDateTime)
         {
+            this.IsApproved = isApproved;
+            this.WasRejected = wasRejected;
             ID = id;
         }
 
