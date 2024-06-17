@@ -26,26 +26,6 @@ namespace Domain
             ManagedShop = managedShop;
         }
 
-
-    public bool AddDiscountedItem(DiscountedItem discountedItem)
-        {
-            // зробити тут виклик контролера і передати потрібний об'єкт, щоб він створив його у БД та повернути тру. У випадку проблем фолс
-            throw new NotImplementedException();
-        }
-
-        public bool CreateDiscount(Discount discount) 
-        {
-            // зробити тут виклик контролера і передати потрібний об'єкт, щоб він створив його у БД та повернути тру. У випадку проблем фолс
-            throw new NotImplementedException();
-        }
-
-        public bool CreateDiscountRequest(Discount discount)
-        {
-            // зробити тут виклик контролера і передати потрібний об'єкт, щоб він створив його у БД та повернути тру. У випадку проблем фолс
-            DiscountRequest request = new DiscountRequest(DateTime.UtcNow, this, discount);
-            throw new NotImplementedException();
-        }
-
         public bool ResetPassword(Admin sender, string newPassword)
         {
             // тут можна додати перевірку на те, чи існує в базі переданий у якості об'єкту адмін, перш ніж дозволяти змінити комусь пароль, але це задача майбутнього
