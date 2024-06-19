@@ -191,7 +191,7 @@ namespace CombinedClient
             {
                 MessageBox.Show($"Щось пішло не так при завантаженні збережених знижок. \nПомилка: {ex.Message}", "Помилка зчитування збережених знижок!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            return Discounts;
+            return discounts;
         }
 
         private void LoadDiscountsFromFile()

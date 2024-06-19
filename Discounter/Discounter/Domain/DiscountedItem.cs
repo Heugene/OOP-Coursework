@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Domain
@@ -13,6 +14,7 @@ namespace Domain
         public string Name { get; set; }
         public ItemType Type { get; set; }
         public string Description { get; set; }
+        [JsonIgnore]
         public Bitmap? Picture { get; set; }
         public Shop Shop { get; set; }
 
